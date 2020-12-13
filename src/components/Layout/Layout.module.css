@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100vh;
+  min-width: 250px;
+  flex-shrink: 0;
+}
+
+.main {
+  margin-left: 250px;
+  padding: 50px 35px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
