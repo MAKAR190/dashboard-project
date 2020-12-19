@@ -1,0 +1,45 @@
+.sidebarBody {
+  background: linear-gradient(175.93deg, #5f00d8 -10.23%, #2ebf91 117.03%);
+  position: fixed;
+  height: 100vh;
+  min-width: 250px;
+  flex-shrink: 0;
+}
+.sidebarLogo {
+  margin-top: 43.13px;
+  margin-left: 34.47px;
+}
+.sidebarHr {
+  margin: auto;
+  margin-top: 35.07px;
+  opacity: 0.2;
+  border: 1px solid #ffffff;
+  size: 2;
+  color: #ffffff;
+}
+.sidebarUl {
+  list-style: none;
+}
+.sidebarUl > li {
+  margin: 25px;
+}
+.sidebarLogout {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 45px;
+  margin-left: 33px;
+}
+.sidebarImg {
+  margin-right: 10px;
+}
+a {
+  text-decoration: none;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 19px;
+  margin: auto;
+  color: #ffffff;
+}
