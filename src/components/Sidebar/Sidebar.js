@@ -13,28 +13,48 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className={styles.sidebarBody}>
-        <img src={logoIcon} className={styles.sidebarLogo} />
+        <img src={logoIcon} className={styles.sidebarLogo} alt="logo" />
         <hr width="181.83" className={styles.sidebarHr} />
         <ul className={styles.sidebarUl}>
           <li>
-            <img className={styles.sidebarImg} src={dashboardIcon} />
+            <img
+              className={styles.sidebarImg}
+              src={dashboardIcon}
+              alt="dashboardicon"
+            />
             <a href="#">Dashboard</a>
           </li>
           <li>
-            <img className={styles.sidebarImg} src={settingsIcon} />
+            <img
+              className={styles.sidebarImg}
+              src={settingsIcon}
+              alt="Settingsicon"
+            />
             <a href="#">Settings</a>
           </li>
           <li>
-            <img className={styles.sidebarImg} src={profileIcon} />
+            <img
+              className={styles.sidebarImg}
+              src={profileIcon}
+              alt="profileicon"
+            />
             <a href="#">Profile</a>
           </li>
           <li>
-            <img className={styles.sidebarImg} src={aboutusIcon} />
+            <img
+              className={styles.sidebarImg}
+              src={aboutusIcon}
+              alt="aboutusicon"
+            />
             <a href="#">About us</a>
           </li>
         </ul>
         <div className={styles.sidebarLogout}>
-          <img className={styles.sidebarImg} src={logoutIcon} />
+          <img
+            className={styles.sidebarImg}
+            src={logoutIcon}
+            alt="logouticon"
+          />
           <a href="#">Logout</a>
         </div>
       </div>

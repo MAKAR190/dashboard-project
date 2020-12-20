@@ -1,0 +1,126 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.formImageWrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  padding-left: 73px;
+  padding-right: 73px;
+  background-color: #fff;
+}
+.formImage {
+  width: 470px;
+  height: 100%;
+  object-fit: cover;
+}
+.title {
+  font-size: var(--title-font-size);
+  font-weight: var(--title-font-weight);
+  line-height: var(--title-line-height);
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.label {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--label-font-size);
+  line-height: var(--label-line-height);
+  font-weight: var(--label-font-weight);
+  padding: 5px;
+  margin-top: 5px;
+  position: relative;
+}
+.input {
+  background: #ffffff;
+  border: 1px solid #d7dbdb;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+  height: 50px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.description {
+  outline: none;
+  background: #ffffff;
+  border: 1px solid #d7dbdb;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height: 162px;
+}
+.btn {
+  background: var(--btn-bgc);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 15px;
+  outline: none;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 17px;
+  margin-bottom: 5px;
+}
+.uploadImage {
+  width: 100%;
+  background-color: #fff;
+  opacity: 0.6;
+  text-align: center;
+  /* padding: 15px; */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+}
+input[type="file"] {
+  visibility: hidden;
+}
+.error {
+  color: red;
+  position: absolute;
+  opacity: 1;
+  top: 83%;
+  transition: opacity 0.5s;
+  animation: error 0.5s;
+  width: 150%;
+  font-size: 12px;
+}
+.errorDescr {
+  color: red;
+  position: absolute;
+  opacity: 1;
+  top: 97%;
+  transition: opacity 0.5s;
+  animation: error 0.5s;
+  width: 150%;
+  font-size: 12px;
+}
+@keyframes error {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

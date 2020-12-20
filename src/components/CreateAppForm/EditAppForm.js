@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import { createApp } from "../../services/appsApi";
+import { editApp } from "../../services/appsApi";
 import styles from "./CreateAppForm.module.css";
 // Image preview
 // https://medium.com/@650egor/react-30-day-challenge-day-2-image-upload-preview-2d534f8eaaa
@@ -30,16 +30,9 @@ export default class CreateAppForm extends Component {
     formData.append("link", this.state.link);
     formData.append("image", this.state.image);
 
-    if (
-      Object.keys(this.state.errors).length === 0 ||
-      !this.state.title === ""||
-      !this.state.description === ""||
-      !this.state.link === ""
-    ) {
-      createApp(formData)
-        .then((res) => console.log(res))
-        .catch((error) => console.dir(error));
-    }
+    editApp(this.props.id, formData)
+      .then((res) => console.log(res))
+      .catch((error) => console.dir(error));
   };
   handleTitleChange = (e) => {
     if (e.target.value.length < 3 || e.target.value.length > 64) {
@@ -115,11 +108,15 @@ export default class CreateAppForm extends Component {
   };
 
   render() {
-    const { title, errors, description, link, image } = this.state;
+    const { title, errors, description, link } = this.state;
     return (
       <div className={styles.wrapper}>
         <div className={styles.formImageWrapper}>
-          <img className={styles.formImage} alt="defaultImage" src={image} />
+          <img
+            className={styles.formImage}
+            alt="defaultImage"
+            src={this.state.image}
+          />
           <label className={styles.uploadImage}>
             Загрузить картинку
             <input
@@ -130,7 +127,7 @@ export default class CreateAppForm extends Component {
           </label>
         </div>
         <form className={styles.form} onSubmit={this.handleCreateApp}>
-          <h1 className={styles.title}>Добавить ссылку</h1>
+          <h1 className={styles.title}>Изменить ссылку</h1>
           <label className={styles.label}>
             Название
             <input
@@ -167,7 +164,7 @@ export default class CreateAppForm extends Component {
             )}
           </label>
           <button className={styles.btn} type="submit">
-            Добавить
+            Изменить
           </button>
         </form>
       </div>

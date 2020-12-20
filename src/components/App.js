@@ -1,8 +1,8 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from "react-router-dom";
 
-import { routes, urls } from '../routes';
+import { routes, urls } from "../routes";
 
-import Layout from './Layout/Layout';
+import Layout from "./Layout/Layout";
 
 function App() {
   return (
