@@ -8,8 +8,15 @@ import aboutusIcon from "../../images/about-us-icon.svg";
 import logoutIcon from "../../images/logout-icon.svg";
 import styles from "../Sidebar/Sidebar.module.css";
 
+const Link = ({ imgUrl, name, altName }) => (
+  <>
+    <img className={styles.sidebarImg} src={imgUrl} alt={altName} />
+    <a href="#">{name}</a>
+  </>
+);
 export default class Sidebar extends Component {
   state = {};
+
   render() {
     return (
       <div className={styles.sidebarBody}>
@@ -17,45 +24,28 @@ export default class Sidebar extends Component {
         <hr width="181.83" className={styles.sidebarHr} />
         <ul className={styles.sidebarUl}>
           <li>
-            <img
-              className={styles.sidebarImg}
-              src={dashboardIcon}
-              alt="dashboardicon"
+            <Link
+              imgUrl={dashboardIcon}
+              name="Dashboard"
+              altName="dashboardicon"
             />
-            <a href="#">Dashboard</a>
           </li>
           <li>
-            <img
-              className={styles.sidebarImg}
-              src={settingsIcon}
-              alt="Settingsicon"
+            <Link
+              imgUrl={settingsIcon}
+              name="Settings"
+              altName="Settingsicon"
             />
-            <a href="#">Settings</a>
           </li>
           <li>
-            <img
-              className={styles.sidebarImg}
-              src={profileIcon}
-              alt="profileicon"
-            />
-            <a href="#">Profile</a>
+            <Link imgUrl={profileIcon} name="Profile" altName="profileicon" />
           </li>
           <li>
-            <img
-              className={styles.sidebarImg}
-              src={aboutusIcon}
-              alt="aboutusicon"
-            />
-            <a href="#">About us</a>
+            <Link imgUrl={aboutusIcon} name="About us" altName="aboutusicon" />
           </li>
         </ul>
         <div className={styles.sidebarLogout}>
-          <img
-            className={styles.sidebarImg}
-            src={logoutIcon}
-            alt="logouticon"
-          />
-          <a href="#">Logout</a>
+          <Link imgUrl={logoutIcon} name="Logout" altName="logouticon" />
         </div>
       </div>
     );
