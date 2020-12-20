@@ -3,6 +3,7 @@ import Modal from "../../components/Modal/Modal";
 import CreateAppForm from "../../components/CreateAppForm/CreateAppForm";
 import EditAppForm from "../../components/CreateAppForm/EditAppForm";
 import { fetchAppsByQuery } from "../../services/appsApi";
+import styles from "./Dashboard.module.css";
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -15,10 +16,9 @@ class Dashboard extends Component {
     fetchAppsByQuery("").then((res) => this.setState({ apps: res.rows }));
   }
 
-  openCreateModal = (id) => {
+  openCreateModal = () => {
     this.setState({
       createModal: true,
-      id: id,
     });
   };
   openEditModal = (id) => {
@@ -38,6 +38,13 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Dashboard</h1>
+        <button
+          className={styles.btn}
+          type="button"
+          onClick={this.openCreateModal}
+        >
+          Add app
+        </button>
         {this.state.apps.map((item) => (
           <li key={item.id}>
             <button type="button" onClick={() => this.openEditModal(item.id)}>
@@ -47,12 +54,12 @@ class Dashboard extends Component {
         ))}
         {this.state.createModal && (
           <Modal onClose={this.onClose}>
-            <CreateAppForm id={this.state.id} />
+            <CreateAppForm close={this.onClose} />
           </Modal>
         )}
         {this.state.editModal && (
           <Modal onClose={this.onClose}>
-            <EditAppForm id={this.state.id} />
+            <EditAppForm close={this.onClose} id={this.state.id} />
           </Modal>
         )}
       </div>
