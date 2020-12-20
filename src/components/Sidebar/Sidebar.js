@@ -7,13 +7,7 @@ import settingsIcon from "../../images/settings-icon.svg";
 import aboutusIcon from "../../images/about-us-icon.svg";
 import logoutIcon from "../../images/logout-icon.svg";
 import styles from "../Sidebar/Sidebar.module.css";
-
-const Link = ({ imgUrl, name, altName }) => (
-  <>
-    <img className={styles.sidebarImg} src={imgUrl} alt={altName} />
-    <a href="#">{name}</a>
-  </>
-);
+import { Link } from "react-router-dom";
 export default class Sidebar extends Component {
   state = {};
 
@@ -24,24 +18,20 @@ export default class Sidebar extends Component {
         <hr width="181.83" className={styles.sidebarHr} />
         <ul className={styles.sidebarUl}>
           <li>
-            <Link
-              imgUrl={dashboardIcon}
-              name="Dashboard"
-              altName="dashboardicon"
-            />
+            <img className={styles.sidebarImg} src={dashboardIcon} alt="" />
+            <Link to="/">Dashboard</Link>
           </li>
           <li>
-            <Link
-              imgUrl={settingsIcon}
-              name="Settings"
-              altName="Settingsicon"
-            />
+            <img className={styles.sidebarImg} src={settingsIcon} alt="" />
+            <Link to="/settings">Settings</Link>
           </li>
           <li>
-            <Link imgUrl={profileIcon} name="Profile" altName="profileicon" />
+            <img className={styles.sidebarImg} src={profileIcon} alt="" />
+            <Link to="/profile">Profile</Link>
           </li>
           <li>
-            <Link imgUrl={aboutusIcon} name="About us" altName="aboutusicon" />
+            <img className={styles.sidebarImg} src={aboutusIcon} alt="" />
+            <Link to="/about-us">About Us</Link>
           </li>
         </ul>
         <div className={styles.sidebarLogout}>

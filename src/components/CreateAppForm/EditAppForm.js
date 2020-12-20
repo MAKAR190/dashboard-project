@@ -1,10 +1,6 @@
 import { Component } from "react";
 
-import {
-  editApp,
-  fetchAppDetails,
-  fetchAppsByQuery,
-} from "../../services/appsApi";
+import { editApp, fetchAppDetails } from "../../services/appsApi";
 import styles from "./CreateAppForm.module.css";
 import { toast } from "react-toastify";
 // Image preview
@@ -45,13 +41,13 @@ export default class CreateAppForm extends Component {
     formData.append("image", this.state.image);
 
     if (this.validateForm()) {
-        editApp(this.props.id, formData)
-          .then((res) => toast.success("App succesfully created!"))
-          .catch((error) => console.log("error"));
-        this.props.close();
-      } else if (!this.validateForm()) {
-        toast.error("Something went wrong");
-      }
+      editApp(this.props.id, formData)
+        .then((res) => toast.success("App succesfully created!"))
+        .catch((error) => console.log("error"));
+      this.props.close();
+    } else if (!this.validateForm()) {
+      toast.error("Something went wrong");
+    }
   };
   handleTitleChange = (e) => {
     if (e.target.value.length < 3 || e.target.value.length > 64) {
