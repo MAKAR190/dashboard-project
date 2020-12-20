@@ -1,22 +1,36 @@
 import { Component } from "react";
 
-import { editApp } from "../../services/appsApi";
+import {
+  editApp,
+  fetchAppDetails,
+  fetchAppsByQuery,
+} from "../../services/appsApi";
 import styles from "./CreateAppForm.module.css";
+import { toast } from "react-toastify";
 // Image preview
 // https://medium.com/@650egor/react-30-day-challenge-day-2-image-upload-preview-2d534f8eaaa
 
 export default class CreateAppForm extends Component {
   state = {
-    image:
-      "https://s3-alpha-sig.figma.com/img/7a22/6e6e/bd327801e7e993b34355d80f81d0eaf8?Expires=1609113600&Signature=h4xO-pocZObaBQx2ak2lfbuEDz0lwwvwufg9zdY0-Oh-Ubd5fYwq9WFXwvZIkMipII5LuZ29IlVsUSVsrZH-orL29tr8IhCnDUBEdqFrRHAGC9pZL1QlntyA2W8jbJ2NPnHym9DPW8Xcm6RtVBRnjae-nKNN2Dc60wRwPAiIsR2i6jLl68m4juzWmkaOkbii8RTf3Syuv43BBgNS7BOlKX1hAYopNJVeryhSH4B6-YLd5BEgCAu~NP3Ysy054ulLoTMYjoMEa0pD1rnAE9PBFTBDp3glvS6j6XckVxP80Pt6xwL7QBKsqE2WbUo6~A5MgvfRM1OKJqTq2GSprvEsyA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+    image: null,
     title: "",
     link: "",
     description: "",
     errors: {},
   };
+  componentDidMount() {
+    fetchAppDetails(this.props.id).then((res) =>
+      this.setState({
+        title: res.title,
+        description: res.description,
+        link: res.link,
+      })
+    );
+  }
+
   handleImageChange = (e) => {
     this.setState({
-      image: URL.createObjectURL(e.target.files[0]),
+      image: e.target.files[0],
     });
   };
 
@@ -30,9 +44,14 @@ export default class CreateAppForm extends Component {
     formData.append("link", this.state.link);
     formData.append("image", this.state.image);
 
-    editApp(this.props.id, formData)
-      .then((res) => console.log(res))
-      .catch((error) => console.dir(error));
+    if (this.validateForm()) {
+        editApp(this.props.id, formData)
+          .then((res) => toast.success("App succesfully created!"))
+          .catch((error) => console.log("error"));
+        this.props.close();
+      } else if (!this.validateForm()) {
+        toast.error("Something went wrong");
+      }
   };
   handleTitleChange = (e) => {
     if (e.target.value.length < 3 || e.target.value.length > 64) {
@@ -88,7 +107,7 @@ export default class CreateAppForm extends Component {
         return {
           errors: {
             ...prevState.errors,
-            link: "Описание должно быть от 3 символов.",
+            link: "Ссылка должна быть от 3 до 512 символов.",
           },
         };
       });
@@ -106,7 +125,14 @@ export default class CreateAppForm extends Component {
       link: e.target.value,
     });
   };
-
+  validateForm = () => {
+    for (let el in this.state.errors) {
+      if (this.state.errors[el] !== "") {
+        return false;
+      }
+    }
+    return true;
+  };
   render() {
     const { title, errors, description, link } = this.state;
     return (
@@ -115,7 +141,11 @@ export default class CreateAppForm extends Component {
           <img
             className={styles.formImage}
             alt="defaultImage"
-            src={this.state.image}
+            src={
+              this.state.image
+                ? URL.createObjectURL(this.state.image)
+                : "https://s3-alpha-sig.figma.com/img/7a22/6e6e/bd327801e7e993b34355d80f81d0eaf8?Expires=1609113600&Signature=h4xO-pocZObaBQx2ak2lfbuEDz0lwwvwufg9zdY0-Oh-Ubd5fYwq9WFXwvZIkMipII5LuZ29IlVsUSVsrZH-orL29tr8IhCnDUBEdqFrRHAGC9pZL1QlntyA2W8jbJ2NPnHym9DPW8Xcm6RtVBRnjae-nKNN2Dc60wRwPAiIsR2i6jLl68m4juzWmkaOkbii8RTf3Syuv43BBgNS7BOlKX1hAYopNJVeryhSH4B6-YLd5BEgCAu~NP3Ysy054ulLoTMYjoMEa0pD1rnAE9PBFTBDp3glvS6j6XckVxP80Pt6xwL7QBKsqE2WbUo6~A5MgvfRM1OKJqTq2GSprvEsyA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+            }
           />
           <label className={styles.uploadImage}>
             Загрузить картинку
