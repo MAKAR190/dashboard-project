@@ -3,7 +3,7 @@ import Modal from "../../components/Modal/Modal";
 import CreateAppForm from "../../components/CreateAppForm/CreateAppForm";
 import EditAppForm from "../../components/CreateAppForm/EditAppForm";
 import { fetchAppsByQuery } from "../../services/appsApi";
-import styles from "./Dashboard.module.css";
+import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -11,6 +11,7 @@ class Dashboard extends Component {
     createModal: false,
     editModal: false,
     id: null,
+    filter: "",
   };
   componentDidMount() {
     fetchAppsByQuery("").then((res) => this.setState({ apps: res.rows }));
@@ -33,19 +34,24 @@ class Dashboard extends Component {
       editModal: false,
     });
   };
-
+  handleChange = ({ target }) => {
+    this.setState({
+      filter: target.value,
+    });
+  };
   render() {
+    const { filter, apps } = this.state;
+    const filterApps = apps.filter((el) =>
+      el.title.toUpperCase().includes(filter.toUpperCase())
+    );
     return (
       <div>
-        <h1>Dashboard</h1>
-        <button
-          className={styles.btn}
-          type="button"
-          onClick={this.openCreateModal}
-        >
-          Add app
-        </button>
-        {this.state.apps.map((item) => (
+        <DashboardHeader
+          value={filter}
+          handleChange={this.handleChange}
+          openCreateModal={this.openCreateModal}
+        />
+        {filterApps.map((item) => (
           <li key={item.id}>
             <button type="button" onClick={() => this.openEditModal(item.id)}>
               {item.title}

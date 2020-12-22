@@ -1,0 +1,47 @@
+.searchWrapperTitle {
+  font-family: Lato;
+  font-weight: normal;
+  font-size: 39px;
+  line-height: 47px;
+}
+.searchWrapper {
+  position: relative;
+}
+.searchInput {
+  width: 40%;
+  height: 36px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 200px;
+  outline: none;
+  font-size: 16px;
+  padding-left: 35px;
+}
+.icon {
+  position: absolute;
+  z-index: 1;
+  top: 67%;
+  left: 1%;
+}
+.btn {
+  width: 105.45px;
+  height: 35.5px;
+  background: #5f00d8;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  outline: none;
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  position: absolute;
+  right: 12%;
+  top: 8%;
+  cursor: pointer;
+}
+.wrapper{
+    margin: 5px;
+    margin-bottom: 10px;
+}

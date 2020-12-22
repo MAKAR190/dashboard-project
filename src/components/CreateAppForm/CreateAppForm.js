@@ -35,11 +35,11 @@ export default class CreateAppForm extends Component {
 
     if (this.validateForm()) {
       createApp(formData)
-        .then((res) => toast.success("App succesfully created!"))
+        .then((res) => toast.success("Приложение создано!"))
         .catch((error) => console.log("error"));
       this.props.close();
     } else if (!this.validateForm()) {
-      toast.error("Something went wrong");
+      toast.error("Что то пошло не так...");
     }
   };
   handleTitleChange = (e) => {
@@ -117,6 +117,12 @@ export default class CreateAppForm extends Component {
   validateForm = () => {
     for (let el in this.state.errors) {
       if (this.state.errors[el] !== "") {
+        return false;
+      } else if (
+        this.state.title === "" &&
+        this.state.description === "" &&
+        this.state.link === ""
+      ) {
         return false;
       }
     }

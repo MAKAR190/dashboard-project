@@ -42,11 +42,11 @@ export default class CreateAppForm extends Component {
 
     if (this.validateForm()) {
       editApp(this.props.id, formData)
-        .then((res) => toast.success("App succesfully created!"))
+        .then((res) => toast.success("Изменено успешно!"))
         .catch((error) => console.log("error"));
       this.props.close();
     } else if (!this.validateForm()) {
-      toast.error("Something went wrong");
+      toast.error("Что то пошло не так...");
     }
   };
   handleTitleChange = (e) => {

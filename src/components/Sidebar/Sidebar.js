@@ -35,7 +35,8 @@ export default class Sidebar extends Component {
           </li>
         </ul>
         <div className={styles.sidebarLogout}>
-          <Link imgUrl={logoutIcon} name="Logout" altName="logouticon" />
+          <img className={styles.sidebarImg} src={logoutIcon} alt="logout" />
+          <Link to="/logout">Logout</Link>
         </div>
       </div>
     );

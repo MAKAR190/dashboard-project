@@ -33,6 +33,9 @@
   left: 0;
   margin-bottom: 45px;
   margin-left: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .sidebarImg {
   margin-right: 10px;
