@@ -1,0 +1,28 @@
+.list{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+.item{
+    width: 200px;
+    height: 250px;
+    text-align: center;
+}
+.description{
+    margin-top: 20px;
+    text-overflow: ellipsis;
+}
+.link{
+    color: rgb(155,96,230);
+    text-decoration: underline;
+}
+.link:hover{
+    color: rgb(145, 91, 214);
+}
+.image{
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+}
