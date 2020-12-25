@@ -4,15 +4,17 @@
   justify-content: space-between;
   align-content: space-around;
   flex-wrap: wrap;
+  width: 88.5%; 
 }
 .item {
-  width: 200px;
+  width: 15%;
   margin: 10px;
   margin-bottom: 20px;
   text-align: center;
+  position: relative;
 }
 .description {
-  margin-top: 20px;
+  margin-top: 10px;
   text-overflow: ellipsis;
 }
 .link {
@@ -23,9 +25,9 @@
   color: #915bd6;
 }
 .image {
-  width: 200px;
-  height: 200px;
+  width: 100%;
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 .loadMoreBtn {
   width: 105.45px;
@@ -46,4 +48,33 @@
 .loader {
   margin: 0 auto;
   display: block;
+}
+.deleteButton {
+  position: absolute;
+  display: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  left: 5px;
+  top: 5px;
+}
+.editButton {
+  position: absolute;
+  top: 3px;
+  left: 40px;
+  display: none;
+  width: 33px;
+  height: 33px;
+  cursor: pointer;
+}
+.item:hover .deleteButton {
+  display: block;
+}
+.item:hover .editButton {
+  display: block;
+}
+.title {
+  font-style: Lato;
+  font-weight: 500;
+  font-size: 18;
 }

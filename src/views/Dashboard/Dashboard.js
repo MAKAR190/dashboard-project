@@ -7,6 +7,8 @@ import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import styles from "./Dashboard.module.css";
 import { toast } from "react-toastify";
 import Loader from "react-loader-spinner";
+import close from '../../images/close-icon.svg';
+import edit from '../../images/edit-icon.svg';
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -31,7 +33,6 @@ class Dashboard extends Component {
       })
     );
   }
-
   openCreateModal = () => {
     this.setState({
       createModal: true,
@@ -86,13 +87,28 @@ class Dashboard extends Component {
         <ul className={styles.list}>
           {filterApps.map((item) => (
             <li className={styles.item} key={item.id}>
-              <button
+              {/* <button className={styles.deleteButton}
                 onClick={() =>
                   deleteApp(item.id).then(toast.success("Удалено успешно!"))
                 }
-              >
-                Delete
-              </button>
+              > */}
+                <img className={styles.deleteButton}
+                onClick={() =>
+                  deleteApp(item.id).then(toast.success("Удалено успешно!"))
+                } 
+                alt="close"
+                src={close}/>
+              {/* <button className={styles.editButton}
+                onClick={() =>
+                  this.openEditModal(item.id)
+                }
+              > */}
+                <img className={styles.editButton}
+                onClick={() =>
+                  this.openEditModal(item.id)
+                }
+                alt="edit"
+                src={edit}/>
               <img
                 src={"https://goiteens-dashboard.herokuapp.com/" + item.image}
                 alt={item.description}
@@ -104,7 +120,7 @@ class Dashboard extends Component {
                 href={item.link}
                 className={styles.link}
               >
-                <h2>{item.title}</h2>
+                <h2 className={styles.title}>{item.title}</h2>
               </a>
               <p className={styles.description}>{item.description}</p>
             </li>

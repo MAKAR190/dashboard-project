@@ -7,6 +7,7 @@ export default class DashboardHeader extends Component {
       <div className={styles.wrapper}>
         <div className={styles.searchWrapper}>
           <h1 className={styles.searchWrapperTitle}>Dashboard</h1>
+          <p className={styles.searchWrapperSmallTitle}>search</p>
           <div className={styles.icon}>
             <img src={icon} alt="icon" />
           </div>

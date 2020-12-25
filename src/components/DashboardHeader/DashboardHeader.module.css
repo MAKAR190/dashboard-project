@@ -2,7 +2,7 @@
   font-family: Lato;
   font-weight: normal;
   font-size: 39px;
-  line-height: 47px;
+  line-height: 24px;
 }
 .searchWrapper {
   position: relative;
@@ -44,4 +44,11 @@
 .wrapper{
     margin: 5px;
     margin-bottom: 10px;
+}
+.searchWrapperSmallTitle{
+  font-family: Lato;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 23px;
+  opacity: 0.5; 
 }
