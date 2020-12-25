@@ -2,9 +2,10 @@ import { Component } from "react";
 import Modal from "../../components/Modal/Modal";
 import CreateAppForm from "../../components/CreateAppForm/CreateAppForm";
 import EditAppForm from "../../components/CreateAppForm/EditAppForm";
-import { fetchAppsByQuery } from "../../services/appsApi";
+import { fetchAppsByQuery, deleteApp } from "../../services/appsApi";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
-import styles from './Dashboard.module.css';
+import styles from "./Dashboard.module.css";
+import { toast } from "react-toastify";
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -19,15 +20,15 @@ class Dashboard extends Component {
   };
   componentDidMount() {
     fetchAppsByQuery(this.state.query, this.state.page).then((res) =>
-    this.setState((prevState) => {
-      return {
-        apps: [...prevState.apps, ...res.rows],
-        page: prevState.page + 1,
-        appsCount: res.count,
-      };
-    })
-  );
-}
+      this.setState((prevState) => {
+        return {
+          apps: [...prevState.apps, ...res.rows],
+          page: prevState.page + 1,
+          appsCount: res.count,
+        };
+      })
+    );
+  }
 
   openCreateModal = () => {
     this.setState({
@@ -51,18 +52,18 @@ class Dashboard extends Component {
       filter: target.value,
     });
   };
-  loadMore = e =>{
+  loadMore = (e) => {
     e.preventDefault();
     fetchAppsByQuery(this.state.query, this.state.page).then((res) =>
-    this.setState((prevState) => {
-      return {
-        apps: [...prevState.apps, ...res.rows],
-        page: prevState.page + 1,
-        appsCount: res.count,
-      };
-    })
-  );
-  }
+      this.setState((prevState) => {
+        return {
+          apps: [...prevState.apps, ...res.rows],
+          page: prevState.page + 1,
+          appsCount: res.count,
+        };
+      })
+    );
+  };
   render() {
     const { filter, apps } = this.state;
     const filterApps = apps.filter((el) =>
@@ -76,16 +77,31 @@ class Dashboard extends Component {
           openCreateModal={this.openCreateModal}
         />
         <ul className={styles.list}>
-        {filterApps.map((item) => (
-          <li onClick={(e) => {console.log(e.target.nodeName); if((e.target.nodeName!=='A') || (e.target.nodeName!=='H2')){this.openEditModal(item.id)}}} className={styles.item} key={item.id}>
-            <img src={item.image} alt={item.description} className={styles.image}/>
-            <a href={item.link} className={styles.link}><h2>{item.title}</h2></a>
-            <p className={styles.description}>{item.description}</p>
-            {/* <button type="button" onClick={() => this.openEditModal(item.id)}>
-              {item.title}
-            </button> */}
-          </li>
-        ))}
+          {filterApps.map((item) => (
+            <li className={styles.item} key={item.id}>
+              <button
+                onClick={() =>
+                  deleteApp(item.id).then(toast.success("Удалено успешно!"))
+                }
+              >
+                Delete
+              </button>
+              <img
+                src={"https://goiteens-dashboard.herokuapp.com/" + item.image}
+                alt={item.description}
+                className={styles.image}
+              />
+              <a
+                rel="noreferrer"
+                target="_blank"
+                href={item.link}
+                className={styles.link}
+              >
+                <h2>{item.title}</h2>
+              </a>
+              <p className={styles.description}>{item.description}</p>
+            </li>
+          ))}
         </ul>
         <button onClick={this.loadMore}>Load more</button>
         {this.state.createModal && (

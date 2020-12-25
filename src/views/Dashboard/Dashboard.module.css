@@ -7,7 +7,7 @@
 }
 .item{
     width: 200px;
-    height: 250px;
+    margin: 10px;
     text-align: center;
 }
 .description{
@@ -15,11 +15,11 @@
     text-overflow: ellipsis;
 }
 .link{
-    color: rgb(155,96,230);
+    color: #9b60e6;
     text-decoration: underline;
 }
 .link:hover{
-    color: rgb(145, 91, 214);
+    color: #915bd6;
 }
 .image{
     width: 200px;
