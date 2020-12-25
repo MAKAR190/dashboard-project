@@ -6,6 +6,7 @@ import { fetchAppsByQuery, deleteApp } from "../../services/appsApi";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import styles from "./Dashboard.module.css";
 import { toast } from "react-toastify";
+import Loader from "react-loader-spinner";
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -17,6 +18,7 @@ class Dashboard extends Component {
     page: 1,
     appsCount: 0,
     query: "",
+    loading: false,
   };
   componentDidMount() {
     fetchAppsByQuery(this.state.query, this.state.page).then((res) =>
@@ -54,18 +56,23 @@ class Dashboard extends Component {
   };
   loadMore = (e) => {
     e.preventDefault();
-    fetchAppsByQuery(this.state.query, this.state.page).then((res) =>
-      this.setState((prevState) => {
-        return {
-          apps: [...prevState.apps, ...res.rows],
-          page: prevState.page + 1,
-          appsCount: res.count,
-        };
-      })
-    );
+    this.setState({
+      loading: true,
+    });
+    fetchAppsByQuery(this.state.query, this.state.page)
+      .then((res) =>
+        this.setState((prevState) => {
+          return {
+            apps: [...prevState.apps, ...res.rows],
+            page: prevState.page + 1,
+            appsCount: res.count,
+          };
+        })
+      )
+      .finally(this.setState({ loading: false }));
   };
   render() {
-    const { filter, apps } = this.state;
+    const { filter, apps, loading, appsCount } = this.state;
     const filterApps = apps.filter((el) =>
       el.title.toUpperCase().includes(filter.toUpperCase())
     );
@@ -103,7 +110,22 @@ class Dashboard extends Component {
             </li>
           ))}
         </ul>
-        <button onClick={this.loadMore}>Load more</button>
+        {loading && (
+          <Loader
+          className={styles.loader}
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000} //3 secs
+          />
+        )}
+        {!loading && apps.length !== appsCount && (
+          <button className={styles.loadMoreBtn} onClick={this.loadMore}>
+            Load more
+          </button>
+        )}
+
         {this.state.createModal && (
           <Modal onClose={this.onClose}>
             <CreateAppForm close={this.onClose} />
