@@ -120,11 +120,6 @@ class Dashboard extends Component {
         <ul className={styles.list}>
           {filterApps.map((item) => (
             <li className={styles.item} key={item.id}>
-              {/* <button className={styles.deleteButton}
-                onClick={() =>
-                  deleteApp(item.id).then(toast.success("Удалено успешно!"))
-                }
-              > */}
               <img
                 className={styles.deleteButton}
                 onClick={() =>
@@ -133,11 +128,6 @@ class Dashboard extends Component {
                 alt="close"
                 src={close}
               />
-              {/* <button className={styles.editButton}
-                onClick={() =>
-                  this.openEditModal(item.id)
-                }
-              > */}
               <img
                 className={styles.editButton}
                 onClick={() => this.openEditModal(item.id)}
