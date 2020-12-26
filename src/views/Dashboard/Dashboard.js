@@ -7,8 +7,8 @@ import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import styles from "./Dashboard.module.css";
 import { toast } from "react-toastify";
 import Loader from "react-loader-spinner";
-import close from '../../images/close-icon.svg';
-import edit from '../../images/edit-icon.svg';
+import close from "../../images/close-icon.svg";
+import edit from "../../images/edit-icon.svg";
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -72,6 +72,39 @@ class Dashboard extends Component {
       )
       .finally(this.setState({ loading: false }));
   };
+
+  handleEditApp = (data) => {
+    toast.success("Приложение успешно изменено!");
+
+    this.setState((prevState) => {
+      return {
+        apps: prevState.apps.map((app) => (app.id === data.id ? data : app)),
+      };
+    });
+  };
+  handleAddApp = (data) => {
+    toast.success("Приложение успешно создано!");
+    this.setState((prevState) => {
+      return {
+        apps: [data, ...prevState.apps],
+      };
+    });
+  };
+  handleDeleteApp = (data) => {
+    toast.success("Приложение успешно удалено!");
+    console.log(data);
+    this.setState((prevState) => {
+      return {
+        apps: prevState.apps.filter((el) => {
+          if (el.id === data.id) {
+            return false;
+          } else {
+            return true;
+          }
+        }),
+      };
+    });
+  };
   render() {
     const { filter, apps, loading, appsCount } = this.state;
     const filterApps = apps.filter((el) =>
@@ -92,23 +125,25 @@ class Dashboard extends Component {
                   deleteApp(item.id).then(toast.success("Удалено успешно!"))
                 }
               > */}
-                <img className={styles.deleteButton}
+              <img
+                className={styles.deleteButton}
                 onClick={() =>
-                  deleteApp(item.id).then(toast.success("Удалено успешно!"))
-                } 
+                  deleteApp(item.id).then(this.handleDeleteApp(item))
+                }
                 alt="close"
-                src={close}/>
+                src={close}
+              />
               {/* <button className={styles.editButton}
                 onClick={() =>
                   this.openEditModal(item.id)
                 }
               > */}
-                <img className={styles.editButton}
-                onClick={() =>
-                  this.openEditModal(item.id)
-                }
+              <img
+                className={styles.editButton}
+                onClick={() => this.openEditModal(item.id)}
                 alt="edit"
-                src={edit}/>
+                src={edit}
+              />
               <img
                 src={"https://goiteens-dashboard.herokuapp.com/" + item.image}
                 alt={item.description}
@@ -128,7 +163,7 @@ class Dashboard extends Component {
         </ul>
         {loading && (
           <Loader
-          className={styles.loader}
+            className={styles.loader}
             type="Puff"
             color="#00BFFF"
             height={100}
@@ -144,12 +179,16 @@ class Dashboard extends Component {
 
         {this.state.createModal && (
           <Modal onClose={this.onClose}>
-            <CreateAppForm close={this.onClose} />
+            <CreateAppForm onSuccess={this.handleAddApp} close={this.onClose} />
           </Modal>
         )}
         {this.state.editModal && (
           <Modal onClose={this.onClose}>
-            <EditAppForm close={this.onClose} id={this.state.id} />
+            <EditAppForm
+              onSuccess={this.handleEditApp}
+              close={this.onClose}
+              id={this.state.id}
+            />
           </Modal>
         )}
       </div>
