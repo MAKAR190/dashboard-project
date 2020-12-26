@@ -2,6 +2,18 @@ import React, { Component } from "react";
 import styles from "./DashboardHeader.module.css";
 import icon from "../../images/search-icon.svg";
 export default class DashboardHeader extends Component {
+  state = {
+    value: "",
+  };
+  handleChange = ({ target }) => {
+    this.setState({
+      value: target.value,
+    });
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.submit(this.state.value);
+  };
   render() {
     return (
       <div className={styles.wrapper}>
@@ -11,12 +23,14 @@ export default class DashboardHeader extends Component {
           <div className={styles.icon}>
             <img src={icon} alt="icon" />
           </div>
-          <input
-            value={this.props.value}
-            onChange={this.props.handleChange}
-            className={styles.searchInput}
-            placeholder="Search"
-          />
+          <form onSubmit={this.handleSubmit}>
+            <input
+              value={this.state.value}
+              onChange={this.handleChange}
+              className={styles.searchInput}
+              placeholder="Search"
+            />
+          </form>
           <button
             className={styles.btn}
             type="button"

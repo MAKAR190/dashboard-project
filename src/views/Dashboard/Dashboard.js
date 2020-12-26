@@ -16,22 +16,21 @@ class Dashboard extends Component {
     createModal: false,
     editModal: false,
     id: null,
-    filter: "",
     page: 1,
     appsCount: 0,
     query: "",
     loading: false,
+    error: false,
   };
   componentDidMount() {
-    fetchAppsByQuery(this.state.query, this.state.page).then((res) =>
-      this.setState((prevState) => {
-        return {
-          apps: [...prevState.apps, ...res.rows],
-          page: prevState.page + 1,
-          appsCount: res.count,
-        };
-      })
-    );
+    this.handleSubmit();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const prevQuery = prevState.query;
+    const nextQuery = this.state.query;
+    if (prevQuery !== nextQuery) {
+      this.handleSubmit();
+    }
   }
   openCreateModal = () => {
     this.setState({
@@ -46,8 +45,12 @@ class Dashboard extends Component {
   };
   onClose = () => {
     this.setState({
+      loading: true,
+    });
+    this.setState({
       createModal: false,
       editModal: false,
+      loading: false,
     });
   };
   handleChange = ({ target }) => {
@@ -55,8 +58,14 @@ class Dashboard extends Component {
       filter: target.value,
     });
   };
-  loadMore = (e) => {
-    e.preventDefault();
+  handleFormSubmit = (value) => {
+    this.setState({
+      query: value,
+      page: 1,
+      apps: [],
+    });
+  };
+  handleSubmit = () => {
     this.setState({
       loading: true,
     });
@@ -70,7 +79,8 @@ class Dashboard extends Component {
           };
         })
       )
-      .finally(this.setState({ loading: false }));
+      .catch(this.setState({ error: true }))
+      .finally(this.setState({ loading: false, error: false }));
   };
 
   handleEditApp = (data) => {
@@ -106,19 +116,16 @@ class Dashboard extends Component {
     });
   };
   render() {
-    const { filter, apps, loading, appsCount } = this.state;
-    const filterApps = apps.filter((el) =>
-      el.title.toUpperCase().includes(filter.toUpperCase())
-    );
+    const { apps, loading, appsCount, error } = this.state;
     return (
       <div className={styles.container}>
         <DashboardHeader
-          value={filter}
-          handleChange={this.handleChange}
+          submit={this.handleFormSubmit}
           openCreateModal={this.openCreateModal}
         />
+        {error && <h1>error</h1>}
         <ul className={styles.list}>
-          {filterApps.map((item) => (
+          {this.state.apps.map((item) => (
             <li className={styles.item} key={item.id}>
               <img
                 className={styles.deleteButton}
@@ -136,7 +143,7 @@ class Dashboard extends Component {
               />
               <img
                 src={"https://goiteens-dashboard.herokuapp.com/" + item.image}
-                alt={item.description}
+                alt={item.title}
                 className={styles.image}
               />
               <a
@@ -162,7 +169,7 @@ class Dashboard extends Component {
           />
         )}
         {!loading && apps.length !== appsCount && (
-          <button className={styles.loadMoreBtn} onClick={this.loadMore}>
+          <button className={styles.loadMoreBtn} onClick={this.handleSubmit}>
             Load more
           </button>
         )}
