@@ -10,6 +10,7 @@
   width: 15%;
   margin: 10px;
   margin-bottom: 20px;
+  max-height: 250px;
   text-align: center;
   position: relative;
 }
@@ -59,6 +60,8 @@
   cursor: pointer;
   left: 5px;
   top: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
 }
 .editButton {
   position: absolute;
@@ -68,6 +71,8 @@
   width: 33px;
   height: 33px;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
 }
 .item:hover .deleteButton {
   display: block;

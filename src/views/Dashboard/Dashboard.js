@@ -45,12 +45,8 @@ class Dashboard extends Component {
   };
   onClose = () => {
     this.setState({
-      loading: true,
-    });
-    this.setState({
       createModal: false,
       editModal: false,
-      loading: false,
     });
   };
   handleChange = ({ target }) => {
@@ -91,18 +87,20 @@ class Dashboard extends Component {
         apps: prevState.apps.map((app) => (app.id === data.id ? data : app)),
       };
     });
+    this.onClose();
   };
   handleAddApp = (data) => {
     toast.success("Приложение успешно создано!");
     this.setState((prevState) => {
       return {
         apps: [data, ...prevState.apps],
+        appsCount: prevState.appsCount + 1,
       };
     });
+    this.onClose();
   };
   handleDeleteApp = (data) => {
     toast.success("Приложение успешно удалено!");
-    console.log(data);
     this.setState((prevState) => {
       return {
         apps: prevState.apps.filter((el) => {
@@ -112,6 +110,7 @@ class Dashboard extends Component {
             return true;
           }
         }),
+        appsCount: prevState.appsCount - 1,
       };
     });
   };
@@ -123,7 +122,7 @@ class Dashboard extends Component {
           submit={this.handleFormSubmit}
           openCreateModal={this.openCreateModal}
         />
-        {error && <h1>error</h1>}
+        {error && <h1>Error</h1>}
         <ul className={styles.list}>
           {this.state.apps.map((item) => (
             <li className={styles.item} key={item.id}>
@@ -142,7 +141,11 @@ class Dashboard extends Component {
                 src={edit}
               />
               <img
-                src={"https://goiteens-dashboard.herokuapp.com/" + item.image}
+                src={
+                  item.image
+                    ? "https://goiteens-dashboard.herokuapp.com/" + item.image
+                    : "https://запорожье.ремонт-холодильников.org/wp-content/uploads/2014/09/default-placeholder.png"
+                }
                 alt={item.title}
                 className={styles.image}
               />

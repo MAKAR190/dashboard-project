@@ -3,25 +3,33 @@ import { Component } from "react";
 import { editApp, fetchAppDetails } from "../../services/appsApi";
 import styles from "./CreateAppForm.module.css";
 import { toast } from "react-toastify";
-// Image preview
-// https://medium.com/@650egor/react-30-day-challenge-day-2-image-upload-preview-2d534f8eaaa
-
+import Loader from "react-loader-spinner";
 export default class CreateAppForm extends Component {
   state = {
     image: null,
     title: "",
     link: "",
+    loading: false,
     description: "",
     errors: {},
   };
   componentDidMount() {
-    fetchAppDetails(this.props.id).then((res) =>
-      this.setState({
-        title: res.title,
-        description: res.description,
-        link: res.link,
-      })
-    );
+    this.setState({
+      loading: true,
+    });
+    fetchAppDetails(this.props.id)
+      .then((res) =>
+        this.setState({
+          title: res.title,
+          description: res.description,
+          link: res.link,
+        })
+      )
+      .finally(() =>
+        this.setState({
+          loading: false,
+        })
+      );
   }
 
   handleImageChange = (e) => {
@@ -32,7 +40,9 @@ export default class CreateAppForm extends Component {
 
   handleCreateApp = (e) => {
     e.preventDefault();
-
+    this.setState({
+      loading: true,
+    });
     const formData = new FormData();
 
     formData.append("title", this.state.title);
@@ -41,12 +51,12 @@ export default class CreateAppForm extends Component {
     formData.append("image", this.state.image);
 
     if (this.validateForm()) {
-      editApp(this.props.id, formData)
-        .then((res) => this.props.onSuccess(res))
-        .catch((error) => console.log("error"));
-      this.props.close();
+      editApp(this.props.id, formData).then((res) => this.props.onSuccess(res));
     } else if (!this.validateForm()) {
       toast.error("Что то пошло не так...");
+      this.setState({
+        loading: false,
+      });
     }
   };
   handleTitleChange = (e) => {
@@ -130,7 +140,7 @@ export default class CreateAppForm extends Component {
     return true;
   };
   render() {
-    const { title, errors, description, link } = this.state;
+    const { title, errors, description, link, loading } = this.state;
     return (
       <div className={styles.wrapper}>
         <div className={styles.formImageWrapper}>
@@ -189,10 +199,24 @@ export default class CreateAppForm extends Component {
               <span className={styles.errorDescr}>{errors.description}</span>
             )}
           </label>
-          <button className={styles.btn} type="submit">
+          <button
+            disabled={loading}
+            className={!loading ? styles.btn : styles.disabledBtn}
+            type="submit"
+          >
             Изменить
           </button>
         </form>
+        {loading && (
+          <Loader
+            className={styles.loader}
+            type="Puff"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000}
+          />
+        )}
       </div>
     );
   }

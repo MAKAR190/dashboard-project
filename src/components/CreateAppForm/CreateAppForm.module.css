@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  position: relative;
 }
 .formImageWrapper {
   display: flex;
@@ -123,4 +124,26 @@ input[type="file"] {
   to {
     opacity: 1;
   }
+}
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+}
+.disabledBtn{
+  background: #ccc;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  padding: 15px;
+  outline: none;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 17px;
+  margin-bottom: 5px;
 }
