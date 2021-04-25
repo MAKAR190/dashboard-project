@@ -4,6 +4,7 @@ import { createApp } from "../../services/appsApi";
 import styles from "./CreateAppForm.module.css";
 import Loader from "react-loader-spinner";
 import { toast } from "react-toastify";
+import modalImage from '../../images/modalImage.png'
 export default class CreateAppForm extends Component {
   state = {
     image: null,
@@ -142,7 +143,7 @@ export default class CreateAppForm extends Component {
             src={
               image
                 ? URL.createObjectURL(image)
-                : "https://s3-alpha-sig.figma.com/img/7a22/6e6e/bd327801e7e993b34355d80f81d0eaf8?Expires=1609113600&Signature=h4xO-pocZObaBQx2ak2lfbuEDz0lwwvwufg9zdY0-Oh-Ubd5fYwq9WFXwvZIkMipII5LuZ29IlVsUSVsrZH-orL29tr8IhCnDUBEdqFrRHAGC9pZL1QlntyA2W8jbJ2NPnHym9DPW8Xcm6RtVBRnjae-nKNN2Dc60wRwPAiIsR2i6jLl68m4juzWmkaOkbii8RTf3Syuv43BBgNS7BOlKX1hAYopNJVeryhSH4B6-YLd5BEgCAu~NP3Ysy054ulLoTMYjoMEa0pD1rnAE9PBFTBDp3glvS6j6XckVxP80Pt6xwL7QBKsqE2WbUo6~A5MgvfRM1OKJqTq2GSprvEsyA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                : modalImage
             }
           />
           <label className={styles.uploadImage}>
