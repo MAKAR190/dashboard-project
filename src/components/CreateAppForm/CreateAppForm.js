@@ -1,215 +1,116 @@
 import { Component } from "react";
-
 import { createApp } from "../../services/appsApi";
 import styles from "./CreateAppForm.module.css";
-import Loader from "react-loader-spinner";
+import Spinner from "../Spinner/Spinner";
 import { toast } from "react-toastify";
-import modalImage from '../../images/modalImage.png'
+import modalImage from "../../images/modalImage.png";
+import FormInput from "../FormInput/FormInput";
+import { Formik } from "formik";
+import * as Yup from "yup";
 export default class CreateAppForm extends Component {
   state = {
-    image: null,
-    title: "",
-    link: "",
     loading: false,
-    description: "",
-    errors: {
-      title: "",
-      description: "",
-      link: "",
-    },
   };
-
-  handleImageChange = (e) => {
-    this.setState({
-      image: e.target.files[0],
-    });
-  };
-
-  handleCreateApp = (e) => {
-    e.preventDefault();
+  handleCreateApp = (data) => {
     this.setState({
       loading: true,
     });
     const formData = new FormData();
 
-    formData.append("title", this.state.title);
-    formData.append("description", this.state.description);
-    formData.append("link", this.state.link);
-    formData.append("image", this.state.image);
-
-    if (this.validateForm()) {
-      createApp(formData).then((res) => this.props.onSuccess(res));
-    } else if (!this.validateForm()) {
-      toast.error("Что то пошло не так...");
-      this.setState({
-        loading: false,
-      });
-    }
-  };
-  handleTitleChange = (e) => {
-    if (e.target.value.length < 3 || e.target.value.length > 64) {
-      this.setState((prevState) => {
-        return {
-          errors: {
-            ...prevState.errors,
-            title: "Название должно быть от 3 до 64 символов.",
-          },
-        };
-      });
-    } else {
-      this.setState((prevState) => {
-        return {
-          errors: {
-            ...prevState.errors,
-            title: "",
-          },
-        };
-      });
-    }
-    this.setState({
-      title: e.target.value,
-    });
-  };
-  handleDescrChange = (e) => {
-    if (e.target.value.length < 3) {
-      this.setState((prevState) => {
-        return {
-          errors: {
-            ...prevState.errors,
-            description: "Описание должно быть от 3 символов.",
-          },
-        };
-      });
-    } else {
-      this.setState((prevState) => {
-        return {
-          errors: {
-            ...prevState.errors,
-            description: "",
-          },
-        };
-      });
-    }
-    this.setState({
-      description: e.target.value,
-    });
-  };
-  handleLinkChange = (e) => {
-    if (e.target.value.length < 3 || e.target.value.length > 512) {
-      this.setState((prevState) => {
-        return {
-          errors: {
-            ...prevState.errors,
-            link: "Ссылка должна быть от 3 до 512 символов.",
-          },
-        };
-      });
-    } else {
-      this.setState((prevState) => {
-        return {
-          errors: {
-            ...prevState.errors,
-            link: "",
-          },
-        };
-      });
-    }
-    this.setState({
-      link: e.target.value,
-    });
-  };
-  validateForm = () => {
-    for (let el in this.state.errors) {
-      if (this.state.errors[el] !== "") {
-        return false;
-      } else if (
-        this.state.title === "" &&
-        this.state.description === "" &&
-        this.state.link === ""
-      ) {
-        return false;
-      }
-    }
-    return true;
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("link", data.link);
+    formData.append("image", data.image);
+    createApp(formData)
+      .then((res) => this.props.onSuccess(res))
+      .catch(() => toast.error("Что то пошло не так..."))
+      .finally(() => this.setState({ loading: false }));
   };
   render() {
-    const { title, errors, description, link, image, loading } = this.state;
+    const { loading } = this.state;
+    const errorsSchema = Yup.object().shape({
+      title: Yup.string()
+        .min(3, "Название должно быть от 3 символов.")
+        .max(255, "Название должно быть до 255 символов.")
+        .required("* Обязательное поле"),
+      link: Yup.string().url().required("* Обязательное поле"),
+      description: Yup.string()
+        .min(3, "Описание должно быть от 3 символов.")
+        .required("* Обязательное поле"),
+      image: Yup.string().url().required("* Обязательное поле"),
+    });
+
     return (
       <div className={styles.wrapper}>
         <div className={styles.formImageWrapper}>
           <img
             className={styles.formImage}
             alt="defaultImage"
-            src={
-              image
-                ? URL.createObjectURL(image)
-                : modalImage
-            }
+            src={modalImage}
           />
-          <label className={styles.uploadImage}>
-            Загрузить картинку
-            <input
-              type="file"
-              accept="image/*"
-              onChange={this.handleImageChange}
-            />
-          </label>
         </div>
-        <form className={styles.form} onSubmit={this.handleCreateApp}>
-          <h1 className={styles.title}>Добавить ссылку</h1>
-          <label className={styles.label}>
-            Название
-            <input
-              value={title}
-              onChange={this.handleTitleChange}
-              type="input"
-              className={styles.input}
-            />
-            {errors.title !== "" && (
-              <span className={styles.error}>{errors.title}</span>
-            )}
-          </label>
-          <label className={styles.label}>
-            Ссылка
-            <input
-              value={link}
-              onChange={this.handleLinkChange}
-              type="input"
-              className={styles.input}
-            />
-            {errors.link !== "" && (
-              <span className={styles.error}>{errors.link}</span>
-            )}
-          </label>
-          <label className={styles.label}>
-            Описание
-            <textarea
-              value={description}
-              onChange={this.handleDescrChange}
-              className={styles.description}
-            />
-            {errors.description !== "" && (
-              <span className={styles.errorDescr}>{errors.description}</span>
-            )}
-          </label>
-          <button
-            disabled={loading}
-            className={!loading ? styles.btn : styles.disabledBtn}
-            type="submit"
-          >
-            Добавить
-          </button>
-          {loading && (
-            <Loader
-              className={styles.loader}
-              type="Puff"
-              color="#00BFFF"
-              height={100}
-              width={100}
-              timeout={3000}
-            />
+        <Formik
+          initialValues={{
+            image: "",
+            title: "",
+            link: "",
+            description: "",
+          }}
+          validationSchema={errorsSchema}
+          onSubmit={(values, actions) => {
+            this.handleCreateApp(values);
+            actions.setSubmitting(false);
+          }}
+        >
+          {(props) => (
+            <form className={styles.form} onSubmit={props.handleSubmit}>
+              <h1 className={styles.title}>Добавить ссылку</h1>
+              <FormInput
+                title="Название"
+                error={props.errors.title}
+                touched={props.touched.title}
+                onChange={props.handleChange}
+                value={props.values.title}
+                type="input"
+                name="title"
+              />
+              <FormInput
+                title="Ссылка"
+                error={props.errors.link}
+                touched={props.touched.link}
+                onChange={props.handleChange}
+                value={props.values.link}
+                type="input"
+                name="link"
+              />
+              <FormInput
+                title="Картинка"
+                error={props.errors.image}
+                touched={props.touched.image}
+                onChange={props.handleChange}
+                value={props.values.image}
+                type="input"
+                name="image"
+              />
+              <FormInput
+                title="Описание"
+                error={props.errors.description}
+                touched={props.touched.description}
+                onChange={props.handleChange}
+                value={props.values.description}
+                name="description"
+              />
+              <button
+                disabled={loading}
+                className={!loading ? styles.btn : styles.disabledBtn}
+                type="submit"
+              >
+                Добавить
+              </button>
+              {loading && <Spinner />}
+            </form>
           )}
-        </form>
+        </Formik>
       </div>
     );
   }

@@ -15,8 +15,23 @@ html {
   --label-font-size: 14px;
   --label-line-height: 17px;
   --btn-bgc: #5f00d8;
+  --link-c: #5f00d8;
+  --link-hover-c: #915bd6;
+  --disabledBtn-bgc: #bdc1ca;
+  --disabledBtn-c: #000;
+  --form-bgc: #ffffff;
+  --btn-c: #ffffff;
+  --search-bgc: #ffffff;
+  --input-bgc: #ffffff;
+  --input-brd: #bdc1ca;
+  --navlink-c: #ffffff;
+  --error-c: #d8004e;
+  --sidebar-theme: linear-gradient(175.93deg, #5f00d8 -10.23%, #2ebf91 117.03%);
 }
-
-/* h1 {
-  font-size: var(--title-font-size);
-} */
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+}

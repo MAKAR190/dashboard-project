@@ -1,5 +1,5 @@
 .sidebarBody {
-  background: linear-gradient(175.93deg, #5f00d8 -10.23%, #2ebf91 117.03%);
+  background: var(--sidebar-theme);
   position: fixed;
   height: 100vh;
   min-width: 250px;
@@ -15,7 +15,7 @@
   opacity: 0.2;
   border: 1px solid #ffffff;
   size: 2;
-  color: #ffffff;
+  color: var(--navlink-c);
 }
 .sidebarUl {
   list-style: none;
@@ -48,5 +48,5 @@ a {
   font-size: 16px;
   line-height: 19px;
   margin: auto;
-  color: #ffffff;
+  color: var(--navlink-c);
 }

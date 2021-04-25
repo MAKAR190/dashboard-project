@@ -14,12 +14,15 @@
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
+  min-width: 500px;
   padding-left: 73px;
   padding-right: 73px;
-  background-color: #fff;
+  background-color: var(--form-bgc);
 }
 .formImage {
-  width: 470px;
+  width: 100%;
+  min-width: 470px;
+  max-width: 470px;
   height: 100%;
   object-fit: cover;
 }
@@ -31,38 +34,9 @@
   padding-top: 40px;
   padding-bottom: 40px;
 }
-.label {
-  display: flex;
-  flex-direction: column;
-  font-size: var(--label-font-size);
-  line-height: var(--label-line-height);
-  font-weight: var(--label-font-weight);
-  padding: 5px;
-  margin-top: 5px;
-  position: relative;
-}
-.input {
-  background: #ffffff;
-  border: 1px solid #d7dbdb;
-  box-sizing: border-box;
-  border-radius: 4px;
-  width: 100%;
-  outline: none;
-  height: 50px;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-.description {
-  outline: none;
-  background: #ffffff;
-  border: 1px solid #d7dbdb;
-  box-sizing: border-box;
-  border-radius: 4px;
-  height: 162px;
-}
 .btn {
   background: var(--btn-bgc);
-  color: #fff;
+  color: var(--btn-c);
   border: none;
   border-radius: 4px;
   padding: 15px;
@@ -75,64 +49,9 @@
   margin-top: 17px;
   margin-bottom: 5px;
 }
-.uploadImage {
-  width: 100%;
-  background-color: #fff;
-  opacity: 0.6;
-  text-align: center;
-  /* padding: 15px; */
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 19px;
-  display: flex;
-  flex-direction: column;
-  padding-top: 15px;
-}
-input[type="file"] {
-  visibility: hidden;
-}
-.error {
-  color: red;
-  position: absolute;
-  opacity: 1;
-  top: 83%;
-  transition: opacity 0.5s;
-  animation: error 0.5s;
-  width: 150%;
-  font-size: 12px;
-}
-.errorDescr {
-  color: red;
-  position: absolute;
-  opacity: 1;
-  top: 97%;
-  transition: opacity 0.5s;
-  animation: error 0.5s;
-  width: 150%;
-  font-size: 12px;
-}
-@keyframes error {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.loader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 101;
-}
-.disabledBtn{
-  background: #ccc;
-  color: #000;
+.disabledBtn {
+  background: var(--disabledBtn-bgc);
+  color: var(--disabledBtn-c);
   border: none;
   border-radius: 4px;
   padding: 15px;

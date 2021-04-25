@@ -9,7 +9,7 @@
 .searchInput {
   width: 40%;
   height: 36px;
-  background: #ffffff;
+  background: var(--search-bgc);
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 200px;
@@ -26,10 +26,10 @@
 .btn {
   width: 105.45px;
   height: 35.5px;
-  background: #5f00d8;
+  background: var(--btn-bgc);
   border-radius: 5px;
   border: none;
-  color: #fff;
+  color: var(--btn-c);
   outline: none;
   font-family: Lato;
   font-weight: bold;

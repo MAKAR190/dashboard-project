@@ -18,11 +18,11 @@
   text-overflow: ellipsis;
 }
 .link {
-  color: #9b60e6;
+  color: var(--link-c);
   text-decoration: underline;
 }
 .link:hover {
-  color: #915bd6;
+  color: var(--link-hover-c);
 }
 .image {
   width: 100%;
@@ -32,10 +32,10 @@
 .loadMoreBtn {
   width: 105.45px;
   height: 35.5px;
-  background: #5f00d8;
+  background: var(--btn-bgc);
   border-radius: 5px;
   border: none;
-  color: #fff;
+  color: var(--btn-c);
   outline: none;
   font-family: Lato;
   font-weight: bold;
