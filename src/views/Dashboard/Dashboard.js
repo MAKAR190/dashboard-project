@@ -180,8 +180,8 @@ class Dashboard extends Component {
 
         {this.state.createModal && (
           <Modal onClose={this.onClose}>
-            {/* <LoginForm /> */}
-            <CreateAppForm onSuccess={this.handleAddApp} close={this.onClose} />
+            <LoginForm />
+            {/* <CreateAppForm onSuccess={this.handleAddApp} close={this.onClose} /> */}
           </Modal>
         )}
         {this.state.editModal && (

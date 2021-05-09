@@ -8,32 +8,9 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import * as operations from "../../redux/auth/authOperations";
 import * as selectors from "../../redux/auth/authSelectors";
-import LoginModalError from "../Modal/LoginErrorModal/LoginModalError";
 class LoginForm extends Component {
-  state = {
-    showModal: true,
-  };
-  componentDidUpdate(prevProps, prevState) {
-    const prevLoginError = prevProps.loginError;
-    const nextLoginError = this.props.loginError;
-    if (prevLoginError !== nextLoginError) {
-      if (nextLoginError && nextLoginError.length > 0) this.openModal();
-    }
-  }
-
-  openModal = () => {
-    this.setState({
-      showModal: true,
-    });
-  };
-  closeModal = () => {
-    this.setState({
-      showModal: false,
-    });
-  };
   render() {
-    const { loading, loginError } = this.props;
-    const { showModal } = this.state;
+    const { loading } = this.props;
     const errorsSchema = Yup.object().shape({
       email: Yup.string().email().required("* Обязательное поле"),
       password: Yup.string().required("* Обязательное поле"),
@@ -55,9 +32,6 @@ class LoginForm extends Component {
           validationSchema={errorsSchema}
           onSubmit={(values, actions) => {
             this.props.login(values);
-            if (loginError.length > 0) {
-              this.openModal();
-            }
             actions.setSubmitting(false);
           }}
         >
@@ -96,7 +70,6 @@ class LoginForm extends Component {
                 Login in
               </button>
               {loading && <Spinner />}
-              {showModal && <LoginModalError onClose={this.closeModal} />}
             </form>
           )}
         </Formik>
