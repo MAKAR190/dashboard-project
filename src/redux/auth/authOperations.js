@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as actions from "./authActions";
 import * as selectors from "./authSelectors";
+import { toast } from "react-toastify";
+import toastOptions from "../../services/toastOptions";
 const token = {
   set(value) {
     axios.defaults.headers.common.Authorization = `Bearer ${value}`;
@@ -17,8 +19,12 @@ export const login = (userData) => (dispatch) => {
       dispatch(actions.clearLoginError());
       token.set(res.data.token);
       dispatch(actions.loginSuccess(res.data));
+      toast.success("Loginned successfully!", toastOptions);
     })
-    .catch((error) => dispatch(actions.loginError(error)));
+    .catch((error) => {
+      dispatch(actions.loginError(error));
+      toast.error("Login error...", toastOptions);
+    });
 };
 export const register = (userData) => (dispatch) => {
   dispatch(actions.registerRequest());
@@ -27,16 +33,22 @@ export const register = (userData) => (dispatch) => {
     .then((res) => {
       token.set(res.data.token);
       dispatch(actions.registerSuccess(res.data));
+      toast.success("Registered successfully!", toastOptions);
     })
-    .catch((error) => dispatch(actions.registerError(error)));
+    .catch((error) => {
+      dispatch(actions.registerError(error));
+      toast.error("Register error...", toastOptions);
+    });
 };
 export const logout = () => (dispatch) => {
   dispatch(actions.logoutRequest());
   try {
     token.unset();
     dispatch(actions.logoutSuccess());
+    toast.success("Logout successfully!", toastOptions);
   } catch (error) {
     dispatch(actions.logoutError(error));
+    toast.error("Logout error...", toastOptions);
   }
 };
 export const fetchUserData = () => (dispatch, getState) => {

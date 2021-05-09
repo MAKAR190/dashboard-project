@@ -34,7 +34,7 @@ html {
   --sidebar-theme: linear-gradient(175.93deg, #5f00d8 -10.23%, #2ebf91 117.03%);
 }
 .loader {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);

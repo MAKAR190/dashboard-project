@@ -1,7 +1,6 @@
 import { Component } from "react";
 import Modal from "../../components/Modal/Modal";
 import CreateAppForm from "../../components/CreateAppForm/CreateAppForm";
-import LoginForm from "../../components/CreateAppForm/LoginForm";
 import EditAppForm from "../../components/CreateAppForm/EditAppForm";
 import { fetchAppsByQuery, deleteApp } from "../../services/appsApi";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
@@ -17,8 +16,9 @@ class Dashboard extends Component {
     createModal: false,
     editModal: false,
     id: null,
-    page: 1,
+    page: 0,
     appsCount: 0,
+    totalPages: 1,
     query: "",
     loading: false,
     error: false,
@@ -70,9 +70,10 @@ class Dashboard extends Component {
       .then((res) =>
         this.setState((prevState) => {
           return {
-            apps: [...prevState.apps, ...res.rows],
+            apps: [...prevState.apps, ...res.apps],
             page: prevState.page + 1,
-            appsCount: res.count,
+            appsCount: res.total,
+            totalPages: res.totalPages,
           };
         })
       )
@@ -116,7 +117,7 @@ class Dashboard extends Component {
     });
   };
   render() {
-    const { apps, loading, appsCount, error } = this.state;
+    const { apps, loading, appsCount, error, totalPages, page } = this.state;
     return (
       <div className={styles.container}>
         <DashboardHeader
@@ -141,15 +142,7 @@ class Dashboard extends Component {
                 alt="edit"
                 src={edit}
               />
-              <img
-                src={
-                  item.image
-                    ? "https://goiteens-dashboard.herokuapp.com/" + item.image
-                    : "https://запорожье.ремонт-холодильников.org/wp-content/uploads/2014/09/default-placeholder.png"
-                }
-                alt={item.title}
-                className={styles.image}
-              />
+              <img src={item.image} alt={item.title} className={styles.image} />
               <a
                 rel="noreferrer"
                 target="_blank"
@@ -169,10 +162,9 @@ class Dashboard extends Component {
             color="#00BFFF"
             height={100}
             width={100}
-            timeout={3000} //3 secs
           />
         )}
-        {!loading && apps.length !== appsCount && (
+        {!loading && apps.length !== appsCount && totalPages !== page && (
           <button className={styles.loadMoreBtn} onClick={this.handleSubmit}>
             Load more
           </button>
@@ -180,8 +172,7 @@ class Dashboard extends Component {
 
         {this.state.createModal && (
           <Modal onClose={this.onClose}>
-            <LoginForm />
-            {/* <CreateAppForm onSuccess={this.handleAddApp} close={this.onClose} /> */}
+            <CreateAppForm onSuccess={this.handleAddApp} close={this.onClose} />
           </Modal>
         )}
         {this.state.editModal && (

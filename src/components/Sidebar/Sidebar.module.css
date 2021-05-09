@@ -23,7 +23,7 @@
 .sidebarUl > li {
   margin: 25px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 50%;
 }
@@ -36,9 +36,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.sidebarImg {
-  margin-right: 10px;
 }
 a {
   text-decoration: none;
