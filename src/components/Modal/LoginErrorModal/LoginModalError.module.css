@@ -1,0 +1,40 @@
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 3px solid var(--loginModal-borderC);
+  padding: 10px;
+  min-width: 400px;
+  height: 200px;
+}
+.modalTitle {
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: var(--title-font-size);
+  color: var(--subtitle-c);
+  margin: 5px;
+}
+.modalError {
+  font-weight: 500;
+  font-size: var(--subtitle-font-size);
+  text-align: center;
+}
+.btnsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.forgotPassword {
+  font-weight: var(--title-font-weight);
+  font-size: var(--label-font-size);
+  color: var(--subtitle-c);
+  text-align: center;
+}
+@media (min-width: 320px) and (max-width: 400px) {
+  .modal {
+    min-width: 300px;
+  }
+}

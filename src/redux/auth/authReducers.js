@@ -18,14 +18,14 @@ const userReducer = createReducer(defaultUserState, {
 });
 const loginErrorsReducer = createReducer(null, {
   [actions.loginError]: (_, { payload }) => payload.message,
+  [actions.clearLoginError]: () => null,
   [actions.logoutError]: (_, { payload }) => payload.message,
 });
 const registerErrorsReducer = createReducer(null, {
   [actions.fetchUserDataError]: (_, { payload }) => payload.message,
   [actions.registerError]: (_, { payload }) => payload.message,
 });
-const fetchUserErrorsReducer = createReducer(null, {
-});
+const fetchUserErrorsReducer = createReducer(null, {});
 
 const loadingReducer = createReducer(false, {
   [actions.loginRequest]: () => true,

@@ -1,6 +1,15 @@
 import React from "react";
 import styles from "./FormInput.module.css";
-const FormInput = ({ title, onChange, error, touched, value, name, type }) => {
+const FormInput = ({
+  title,
+  onChange,
+  error,
+  touched,
+  value,
+  password,
+  name,
+  type,
+}) => {
   return (
     <>
       {type === "input" ? (
@@ -9,9 +18,9 @@ const FormInput = ({ title, onChange, error, touched, value, name, type }) => {
           <input
             value={value}
             onChange={onChange}
-            type="input"
             className={styles.input}
             name={name}
+            type={password ? "password" : "text"}
           />
           {touched && error && <span className={styles.error}>{error}</span>}
         </label>

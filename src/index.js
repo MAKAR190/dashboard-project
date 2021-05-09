@@ -8,7 +8,7 @@ import axios from "axios";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
-axios.defaults.baseURL = "https://goit-phonebook-api.herokuapp.com/api";
+axios.defaults.baseURL = "https://goiteens-dashboard.herokuapp.com/api";
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>

@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Modal from "../../components/Modal/Modal";
 import CreateAppForm from "../../components/CreateAppForm/CreateAppForm";
+import LoginForm from "../../components/CreateAppForm/LoginForm";
 import EditAppForm from "../../components/CreateAppForm/EditAppForm";
 import { fetchAppsByQuery, deleteApp } from "../../services/appsApi";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
@@ -179,6 +180,7 @@ class Dashboard extends Component {
 
         {this.state.createModal && (
           <Modal onClose={this.onClose}>
+            {/* <LoginForm /> */}
             <CreateAppForm onSuccess={this.handleAddApp} close={this.onClose} />
           </Modal>
         )}

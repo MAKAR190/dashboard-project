@@ -1,25 +1,38 @@
-import axios from 'axios';
-
+import axios from "axios";
 const config = {
-  baseURL: 'https://goiteens-dashboard.herokuapp.com/api',
+  baseURL: "https://goiteens-dashboard.herokuapp.com/api",
 };
 
 export function fetchAppsByQuery(query, page = 1) {
   return axios({
     ...config,
-    method: 'get',
-    url: '/apps',
+    method: "get",
+    url: "/apps",
     params: {
       page,
       query,
     },
   }).then((res) => res.data);
 }
-
+export function fetchAllApps(query, page = 1, perPage = 18) {
+  return axios({
+    ...config,
+    method: "get",
+    url: "/apps/all",
+    headers: {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+    },
+    params: {
+      page,
+      query,
+      perPage,
+    },
+  }).then((res) => res.data);
+}
 export function fetchAppDetails(appId) {
   return axios({
     ...config,
-    method: 'get',
+    method: "get",
     url: `/apps/${appId}`,
   }).then((res) => res.data);
 }
@@ -28,10 +41,11 @@ export function createApp(data) {
   return axios({
     ...config,
     headers: {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
     },
-    method: 'post',
-    url: '/apps',
+    method: "post",
+    url: "/apps",
     data,
   }).then((res) => res.data);
 }
@@ -40,9 +54,9 @@ export function editApp(appId, newData) {
   return axios({
     ...config,
     headers: {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
     },
-    method: 'put',
+    method: "put",
     url: `/apps/${appId}`,
     data: newData,
   }).then((res) => res.data);
@@ -51,7 +65,7 @@ export function editApp(appId, newData) {
 export function deleteApp(appId) {
   return axios({
     ...config,
-    method: 'delete',
+    method: "delete",
     url: `/apps/${appId}`,
   }).then((res) => res.data);
 }

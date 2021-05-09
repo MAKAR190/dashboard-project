@@ -14,6 +14,7 @@ export const login = (userData) => (dispatch) => {
   axios
     .post("/auth/login", userData)
     .then((res) => {
+      dispatch(actions.clearLoginError());
       token.set(res.data.token);
       dispatch(actions.loginSuccess(res.data));
     })

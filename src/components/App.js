@@ -11,7 +11,6 @@ function App() {
         {routes.map((route) => (
           <Route key={route.path} {...route} />
         ))}
-
         <Redirect to={urls.notFound} />
       </Switch>
     </Layout>
