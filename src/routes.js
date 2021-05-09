@@ -1,7 +1,8 @@
 import Dashboard from "./views/Dashboard/Dashboard";
-import Profile from "./views/Profile";
-import Settings from "./views/Settings";
-import AboutUs from "./views/AboutUs";
+import Settings from "./views/Settings/Settings";
+import Profile from "./views/Profile/Profile";
+import AboutUs from "./views/AboutUs/AboutUs";
+import Logout from "./views/Logout/Logout";
 import NotFound from "./views/NotFound/NotFound";
 
 export const urls = {
@@ -30,13 +31,13 @@ export const routes = [
     component: Settings,
   },
   {
+    path: urls.profile,
+    exact: true,
+    component: Profile,
+  },
+  {
     path: urls.aboutUs,
     exact: true,
     component: AboutUs,
-  },
-  {
-    path: urls.notFound,
-    exact: true,
-    component: NotFound,
   },
 ];
