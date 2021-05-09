@@ -28,7 +28,6 @@ export function createApp(data) {
     ...config,
     headers: {
       "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
     },
     method: "post",
     url: "/apps",
