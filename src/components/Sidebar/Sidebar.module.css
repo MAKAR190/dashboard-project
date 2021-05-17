@@ -47,3 +47,8 @@ a {
   margin: auto;
   color: var(--navlink-c);
 }
+@media (min-width: 320px) and (max-width: 1023px) {
+  .sidebarBody {
+    display: none;
+  }
+}

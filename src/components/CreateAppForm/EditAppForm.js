@@ -22,14 +22,8 @@ export default function CreateAppForm({ id, onSuccess }) {
   });
   const handleCreateApp = (data) => {
     setLoading(true);
-    const formData = new FormData();
 
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("link", data.link);
-    formData.append("image", data.image);
-
-    editApp(id, formData)
+    editApp(id, data)
       .then((res) => onSuccess(res))
       .catch(() => toast.error("Что то пошло не так..."))
       .finally(() => setLoading(false));

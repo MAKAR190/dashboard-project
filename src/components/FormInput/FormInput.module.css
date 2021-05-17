@@ -30,6 +30,8 @@
   animation: error 0.5s;
   width: 150%;
   font-size: 12px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 .description {
   outline: none;
@@ -55,5 +57,18 @@
   }
   to {
     opacity: 1;
+  }
+}
+@media (min-width: 320px) and (max-width: 1023px) {
+  .input {
+    height: 30px;
+    margin: 0;
+    font-size: 14px;
+  }
+  .description {
+    height: 100px;
+  }
+  .label {
+    font-size: 12px;
   }
 }

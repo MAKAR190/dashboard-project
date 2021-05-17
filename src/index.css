@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-html {
+html.default {
   font-family: "Lato", sans-serif;
   --title-font-size: 39px;
   --title-font-weight: normal;
@@ -32,6 +32,38 @@ html {
   --navlink-c: #ffffff;
   --error-c: #d8004e;
   --sidebar-theme: linear-gradient(175.93deg, #5f00d8 -10.23%, #2ebf91 117.03%);
+}
+html.orange {
+  font-family: "Lato", sans-serif;
+  --title-font-size: 39px;
+  --title-font-weight: normal;
+  --title-line-height: 35px;
+  --label-font-weight: 300;
+  --label-font-size: 14px;
+  --subtitle-font-size: 18px;
+  --btn-font-size: 18px;
+  --label-line-height: 17px;
+  --btn-bgc: #5f00d8;
+  --link-c: #5f00d8;
+  --label-c: #5f00d8;
+  --subtitle-c: #5f00d8;
+  --loginModal-borderC: #5f00d8;
+  --link-hover-c: #915bd6;
+  --disabledBtn-bgc: #bdc1ca;
+  --disabledBtn-c: #000;
+  --form-bgc: #ffffff;
+  --btn-c: #ffffff;
+  --search-bgc: #ffffff;
+  --input-bgc: #ffffff;
+  --input-brd: #bdc1ca;
+  --navlink-c: #ffffff;
+  --error-c: #d8004e;
+  --sidebar-theme: linear-gradient(
+    175.93deg,
+    #fe676c -10.23%,
+    #fbd786 50.67%,
+    #a4ffc9 117.03%
+  );
 }
 .loader {
   position: fixed;

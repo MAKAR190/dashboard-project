@@ -3,7 +3,7 @@ const config = {
   baseURL: "https://goiteens-dashboard.herokuapp.com/api",
 };
 
-export function fetchAppsByQuery(query, page = 1, perPage = 18) {
+export function fetchAppsByQuery(query, page = 1, perPage = 12) {
   return axios({
     ...config,
     method: "get",
@@ -26,9 +26,6 @@ export function fetchAppDetails(appId) {
 export function createApp(data) {
   return axios({
     ...config,
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
     method: "post",
     url: "/apps",
     data,
@@ -38,9 +35,6 @@ export function createApp(data) {
 export function editApp(appId, newData) {
   return axios({
     ...config,
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
     method: "put",
     url: `/apps/${appId}`,
     data: newData,

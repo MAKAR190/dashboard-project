@@ -2,6 +2,7 @@ import { Component } from "react";
 import Modal from "../../components/Modal/Modal";
 import CreateAppForm from "../../components/CreateAppForm/CreateAppForm";
 import EditAppForm from "../../components/CreateAppForm/EditAppForm";
+import queryString from "query-string";
 import { fetchAppsByQuery, deleteApp } from "../../services/appsApi";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import styles from "./Dashboard.module.css";
@@ -19,18 +20,43 @@ class Dashboard extends Component {
     page: 0,
     appsCount: 0,
     totalPages: 1,
-    query: "",
     loading: false,
     error: false,
   };
   componentDidMount() {
-    this.handleSubmit();
+    const getCategoryFromProps = (string) => queryString.parse(string);
+    const { query } = getCategoryFromProps(this.props.location.search);
+    const { page } = getCategoryFromProps(this.props.location.search);
+    if (query) {
+      this.handleSubmit(query, page);
+      this.setState({ page });
+    } else {
+      this.handleSubmit("", 1);
+      this.setState({ page: 1 });
+    }
   }
   componentDidUpdate(prevProps, prevState) {
-    const prevQuery = prevState.query;
-    const nextQuery = this.state.query;
+    const getCategoryFromProps = (string) => queryString.parse(string);
+    const { query: prevQuery } = getCategoryFromProps(
+      prevProps.location.search
+    );
+    const { query: nextQuery } = getCategoryFromProps(
+      this.props.location.search
+    );
+    const { page: prevPage } = getCategoryFromProps(prevProps.location.search);
+    const { page: nextPage } = getCategoryFromProps(this.props.location.search);
     if (prevQuery !== nextQuery) {
-      this.handleSubmit();
+      this.handleSubmit(nextQuery, 1);
+    }
+    if (prevPage !== nextPage) {
+      this.handleSubmit(nextQuery, nextPage);
+      this.setState({ page: nextPage });
+    }
+    if (prevState.apps !== this.state.apps) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   }
   openCreateModal = () => {
@@ -56,21 +82,27 @@ class Dashboard extends Component {
     });
   };
   handleFormSubmit = (value) => {
-    this.setState({
-      query: value,
-      page: 1,
-      apps: [],
-    });
+    if (value) {
+      this.props.history.push({
+        ...this.props.location,
+        search: `page=${1}&query=${value}`,
+      });
+    } else if (value === "") {
+      this.props.history.push({
+        ...this.props.location,
+        search: "",
+      });
+    }
   };
-  handleSubmit = () => {
+  handleSubmit = (query, page) => {
     this.setState({
       loading: true,
     });
-    fetchAppsByQuery(this.state.query, this.state.page)
+    fetchAppsByQuery(query, page, 11)
       .then((res) =>
         this.setState((prevState) => {
           return {
-            apps: [...prevState.apps, ...res.apps],
+            apps: res.apps,
             page: prevState.page + 1,
             appsCount: res.total,
             totalPages: res.totalPages,
@@ -151,7 +183,9 @@ class Dashboard extends Component {
               >
                 <h2 className={styles.title}>{item.title}</h2>
               </a>
-              <p className={styles.description}>{item.description}</p>
+              <div className={styles.description}>
+                <p>{item.description}</p>
+              </div>
             </li>
           ))}
         </ul>

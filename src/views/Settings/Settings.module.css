@@ -1,0 +1,13 @@
+.line {
+  opacity: 0.2;
+  background: #2ebf91;
+  transform: rotate(-0.11deg);
+  width: 518px;
+  height: 5px;
+  margin: 25px 0 10px 0;
+}
+.subtitle {
+  color: var(--subtitle-c);
+  margin: 18px 0 33px 0;
+  font-size: 1.5rem;
+}

@@ -15,3 +15,12 @@
   flex-grow: 1;
   overflow-y: auto;
 }
+@media (min-width: 320px) and (max-width: 1023px) {
+  .sidebar {
+    display: none;
+  }
+  .main {
+    margin: 0;
+    padding: 4px 20px;
+  }
+}

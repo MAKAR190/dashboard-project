@@ -18,18 +18,21 @@ export default class DashboardHeader extends Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.searchWrapper}>
-          <h1 className={styles.searchWrapperTitle}>Dashboard</h1>
-          <div className={styles.icon}>
-            <img src={icon} alt="icon" />
+          <div className={styles.searchWrapperBox}>
+            <h1 className={styles.searchWrapperTitle}>Dashboard</h1>
+
+            <form className={styles.form} onSubmit={this.handleSubmit}>
+              <input
+                value={this.state.value}
+                onChange={this.handleChange}
+                className={styles.searchInput}
+                placeholder="Search"
+              />
+              <div className={styles.icon}>
+                <img src={icon} alt="icon" />
+              </div>
+            </form>
           </div>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              value={this.state.value}
-              onChange={this.handleChange}
-              className={styles.searchInput}
-              placeholder="Search"
-            />
-          </form>
           <button
             className={styles.btn}
             type="button"

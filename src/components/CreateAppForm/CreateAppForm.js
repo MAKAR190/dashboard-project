@@ -15,13 +15,8 @@ export default class CreateAppForm extends Component {
     this.setState({
       loading: true,
     });
-    const formData = new FormData();
 
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("link", data.link);
-    formData.append("image", data.image);
-    createApp(formData)
+    createApp(data)
       .then((res) => this.props.onSuccess(res))
       .catch(() => toast.error("Что то пошло не так..."))
       .finally(() => this.setState({ loading: false }));
