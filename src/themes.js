@@ -6,5 +6,5 @@ export const themes = {
   green: "Green",
   lightgreen: "Lightgreen",
   purpleblue: "Purpleblue",
-  rainbow: "Rainbow",
+  salat: "Salat",
 };

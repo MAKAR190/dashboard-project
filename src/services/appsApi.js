@@ -3,7 +3,7 @@ const config = {
   baseURL: "https://goiteens-dashboard.herokuapp.com/api",
 };
 
-export function fetchAppsByQuery(query, page = 1, perPage = 12) {
+export function fetchAppsByQuery(query, page = 1, perPage = 18) {
   return axios({
     ...config,
     method: "get",

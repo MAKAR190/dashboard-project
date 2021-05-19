@@ -2,7 +2,7 @@
   opacity: 0.2;
   background: #2ebf91;
   transform: rotate(-0.11deg);
-  width: 518px;
+  width: 40%;
   height: 5px;
   margin: 25px 0 10px 0;
 }
@@ -10,4 +10,23 @@
   color: var(--subtitle-c);
   margin: 18px 0 33px 0;
   font-size: 1.5rem;
+}
+.subSubtitle {
+  color: var(--subtitle-c);
+  margin: 18px 0 33px 0;
+  font-size: 1.3rem;
+}
+.img {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 30%;
+}
+@media (min-width: 320px) and (max-width: 1023px) {
+  .line {
+    min-width: 100%;
+  }
+  .img {
+    display: none;
+  }
 }

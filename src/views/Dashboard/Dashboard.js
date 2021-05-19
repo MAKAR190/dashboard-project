@@ -19,7 +19,8 @@ class Dashboard extends Component {
     id: null,
     page: 0,
     appsCount: 0,
-    totalPages: 1,
+    perPage: 18,
+    totalPages: null,
     loading: false,
     error: false,
   };
@@ -29,10 +30,12 @@ class Dashboard extends Component {
     const { page } = getCategoryFromProps(this.props.location.search);
     if (query) {
       this.handleSubmit(query, page);
-      this.setState({ page });
+      this.props.history.push({
+        ...this.props.location,
+        search: `page=${page}&query=${query}`,
+      });
     } else {
-      this.handleSubmit("", 1);
-      this.setState({ page: 1 });
+      this.handleSubmit("", 0);
     }
   }
   componentDidUpdate(prevProps, prevState) {
@@ -43,16 +46,10 @@ class Dashboard extends Component {
     const { query: nextQuery } = getCategoryFromProps(
       this.props.location.search
     );
-    const { page: prevPage } = getCategoryFromProps(prevProps.location.search);
-    const { page: nextPage } = getCategoryFromProps(this.props.location.search);
     if (prevQuery !== nextQuery) {
       this.handleSubmit(nextQuery, 1);
     }
-    if (prevPage !== nextPage) {
-      this.handleSubmit(nextQuery, nextPage);
-      this.setState({ page: nextPage });
-    }
-    if (prevState.apps !== this.state.apps) {
+    if (prevState.apps !== this.state.apps && prevQuery !== nextQuery) {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -87,6 +84,10 @@ class Dashboard extends Component {
         ...this.props.location,
         search: `page=${1}&query=${value}`,
       });
+      this.setState({
+        apps: [],
+        page: 1,
+      });
     } else if (value === "") {
       this.props.history.push({
         ...this.props.location,
@@ -98,11 +99,11 @@ class Dashboard extends Component {
     this.setState({
       loading: true,
     });
-    fetchAppsByQuery(query, page, 11)
+    fetchAppsByQuery(query, page, this.state.perPage)
       .then((res) =>
         this.setState((prevState) => {
           return {
-            apps: res.apps,
+            apps: [...prevState.apps, ...res.apps],
             page: prevState.page + 1,
             appsCount: res.total,
             totalPages: res.totalPages,
@@ -149,7 +150,8 @@ class Dashboard extends Component {
     });
   };
   render() {
-    const { apps, loading, appsCount, error, totalPages, page } = this.state;
+    const { apps, loading, appsCount, error, totalPages, page, query } =
+      this.state;
     return (
       <div className={styles.container}>
         <DashboardHeader
@@ -199,7 +201,10 @@ class Dashboard extends Component {
           />
         )}
         {!loading && apps.length !== appsCount && totalPages !== page && (
-          <button className={styles.loadMoreBtn} onClick={this.handleSubmit}>
+          <button
+            className={styles.loadMoreBtn}
+            onClick={() => this.handleSubmit(query, page)}
+          >
             Load more
           </button>
         )}

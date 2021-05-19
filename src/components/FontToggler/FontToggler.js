@@ -1,39 +1,68 @@
 import React from "react";
 import dropdownArrowIcon from "../../images/dropdownArrow.svg";
-import styles from "./themeToggler.module.css";
+import styles from "./FontToggler.module.css";
+import transitions from "./transitions.module.css";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 const ThemeToggler = ({
   visible,
-  handleThemeChange,
-  toggleThemesVisible,
-  themes,
-  activeTheme,
+  handleFontChange,
+  toggleFontsVisible,
+  fonts,
+  activeFont,
 }) => {
   return (
     <div className={styles.control}>
       <div className={styles.placeholder}>
-        <button type="button" className={styles.color} />
+        <div
+          className={styles.font}
+          style={
+            activeFont && activeFont.length < 3
+              ? {
+                  fontSize: activeFont + "px",
+                }
+              : {
+                  fontFamily: activeFont,
+                }
+          }
+        >
+          <p>{activeFont}</p>
+        </div>
         <button
           type="button"
           className={styles.dropdownBtn}
-          onClick={toggleThemesVisible}
+          onClick={toggleFontsVisible}
         >
           <img src={dropdownArrowIcon} alt="arrow" />
         </button>
       </div>
       {visible && (
-        <ul onChange={handleThemeChange} className={styles.list}>
-          {Object.keys(themes)
-            .filter((themeKey) => themeKey !== activeTheme)
+        <TransitionGroup component="ul" className={styles.list}>
+          {Object.keys(fonts)
+            .filter((fontKey) => fontKey !== activeFont)
             .map((el) => (
-              <li className={styles.item} key={el} value={el}>
-                <button
-                  type="button"
-                  className={styles[el]}
-                  onClick={() => handleThemeChange(el)}
-                />
-              </li>
+              <CSSTransition key={el} timeout={200} classNames={transitions}>
+                <li className={styles.item}>
+                  <button
+                    type="button"
+                    className={styles.font}
+                    id={styles.fontItem}
+                    onClick={() => handleFontChange(el)}
+                    style={
+                      el.length < 3
+                        ? {
+                            fontSize: el + "px",
+                          }
+                        : {
+                            fontFamily: el,
+                          }
+                    }
+                  >
+                    {el}
+                  </button>
+                </li>
+              </CSSTransition>
             ))}
-        </ul>
+        </TransitionGroup>
       )}
     </div>
   );

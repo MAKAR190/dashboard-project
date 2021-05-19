@@ -44,7 +44,7 @@
   cursor: pointer;
   font-style: normal;
   font-weight: bold;
-  font-size: 14px;
+  font-size: var(--btn-font-size);
   line-height: 20px;
   margin-top: 17px;
   margin-bottom: 5px;
@@ -59,7 +59,7 @@
   cursor: pointer;
   font-style: normal;
   font-weight: bold;
-  font-size: 14px;
+  font-size: var(--btn-font-size);
   line-height: 20px;
   margin-top: 17px;
   margin-bottom: 5px;
@@ -83,7 +83,7 @@
     background-color: var(--form-bgc);
   }
   .title {
-    font-size: 18px;
+    font-size: var(--subtitle-font-size);
     padding: 0;
   }
   .formImage {
@@ -103,7 +103,7 @@
     cursor: pointer;
     font-style: normal;
     font-weight: bold;
-    font-size: 12px;
+    font-size: var(--btn-font-size);
     line-height: 20px;
     margin-top: 17px;
     margin-bottom: 5px;
@@ -118,7 +118,7 @@
     cursor: pointer;
     font-style: normal;
     font-weight: bold;
-    font-size: 12px;
+    font-size: var(--btn-font-size);
     line-height: 20px;
     margin-top: 17px;
     margin-bottom: 5px;

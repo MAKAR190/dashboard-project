@@ -1,6 +1,8 @@
 import React from "react";
 import dropdownArrowIcon from "../../images/dropdownArrow.svg";
 import styles from "./themeToggler.module.css";
+import transitions from "./transitions.module.css";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 const ThemeToggler = ({
   visible,
   handleThemeChange,
@@ -21,19 +23,21 @@ const ThemeToggler = ({
         </button>
       </div>
       {visible && (
-        <ul onChange={handleThemeChange} className={styles.list}>
+        <TransitionGroup component="ul" className={styles.list}>
           {Object.keys(themes)
             .filter((themeKey) => themeKey !== activeTheme)
             .map((el) => (
-              <li className={styles.item} key={el} value={el}>
-                <button
-                  type="button"
-                  className={styles[el]}
-                  onClick={() => handleThemeChange(el)}
-                />
-              </li>
+              <CSSTransition key={el} timeout={200} classNames={transitions}>
+                <li className={styles.item}>
+                  <button
+                    type="button"
+                    className={styles[el]}
+                    onClick={() => handleThemeChange(el)}
+                  />
+                </li>
+              </CSSTransition>
             ))}
-        </ul>
+        </TransitionGroup>
       )}
     </div>
   );

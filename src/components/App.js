@@ -9,7 +9,12 @@ import * as operations from "../redux/auth/authOperations";
 function App({ fetchUserData }) {
   useEffect(() => {
     fetchUserData();
-  }, []);
+    if (localStorage.getItem("activeTheme")) {
+      document.querySelector("html").className = JSON.parse(
+        localStorage.getItem("activeTheme")
+      );
+    }
+  }, [fetchUserData]);
   return (
     <Layout>
       <Switch>
