@@ -3,6 +3,8 @@ import Settings from "./views/Settings/Settings";
 import Profile from "./views/Profile/Profile";
 import AboutUs from "./views/AboutUs/AboutUs";
 import NotFound from "./views/NotFound/NotFound";
+import Login from "./views/Login/Login";
+import Register from "./views/Register/Reg";
 
 export const urls = {
   dashboard: "/",
@@ -11,6 +13,8 @@ export const urls = {
   aboutUs: "/about-us",
   logout: "/logout",
   notFound: "/404",
+  login: "/login",
+  register: "/register",
 };
 
 export const routes = [
@@ -41,6 +45,20 @@ export const routes = [
     component: AboutUs,
     private: false,
     restricted: false,
+  },
+  {
+    path: urls.login,
+    exact: true,
+    component: Login,
+    private: false,
+    restricted: true,
+  },
+  {
+    path: urls.register,
+    exact: true,
+    component: Register,
+    private: false,
+    restricted: true,
   },
   {
     path: urls.notFound,

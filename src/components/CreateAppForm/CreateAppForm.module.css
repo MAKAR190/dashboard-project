@@ -4,6 +4,22 @@
   width: 100%;
   position: relative;
 }
+#authWrapper {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+#authImg {
+  min-width: 350px;
+  max-width: 350px;
+  height: 100%;
+  object-fit: cover;
+}
+#signUp {
+  text-align: center;
+}
 .formImageWrapper {
   display: flex;
   flex-direction: column;
@@ -34,6 +50,14 @@
   padding-top: 40px;
   padding-bottom: 40px;
 }
+.loginTitle {
+  font-size: var(--title-font-size);
+  font-weight: var(--title-font-weight);
+  line-height: var(--title-line-height);
+  text-align: left;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 .btn {
   background: var(--btn-bgc);
   color: var(--btn-c);
@@ -42,7 +66,6 @@
   padding: 15px;
   outline: none;
   cursor: pointer;
-  font-style: normal;
   font-weight: bold;
   font-size: var(--btn-font-size);
   line-height: 20px;
@@ -57,7 +80,6 @@
   padding: 15px;
   outline: none;
   cursor: pointer;
-  font-style: normal;
   font-weight: bold;
   font-size: var(--btn-font-size);
   line-height: 20px;
@@ -85,6 +107,10 @@
   .title {
     font-size: var(--subtitle-font-size);
     padding: 0;
+    text-align: center;
+  }
+  .loginTitle {
+    text-align: center;
   }
   .formImage {
     width: 100%;
@@ -98,10 +124,9 @@
     color: var(--btn-c);
     border: none;
     border-radius: 4px;
-    padding: 5px;
+    padding: 15px;
     outline: none;
     cursor: pointer;
-    font-style: normal;
     font-weight: bold;
     font-size: var(--btn-font-size);
     line-height: 20px;
@@ -113,15 +138,24 @@
     color: var(--disabledBtn-c);
     border: none;
     border-radius: 4px;
-    padding: 5px;
+    padding: 15px;
     outline: none;
     cursor: pointer;
-    font-style: normal;
     font-weight: bold;
     font-size: var(--btn-font-size);
     line-height: 20px;
     margin-top: 17px;
     margin-bottom: 5px;
+  }
+  .textWrapper {
+    text-align: center;
+  }
+  #authImg {
+    display: none;
+  }
+  #auhtWrapper {
+    width: 100%;
+    min-width: 300px;
   }
 }
 @media (min-width: 320px) and (max-width: 768px) {

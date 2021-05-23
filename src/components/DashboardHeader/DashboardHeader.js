@@ -19,7 +19,7 @@ export default class DashboardHeader extends Component {
       <div className={styles.wrapper}>
         <div className={styles.searchWrapper}>
           <div className={styles.searchWrapperBox}>
-            <h1 className={styles.searchWrapperTitle}>Dashboard</h1>
+            <h1 className={styles.searchWrapperTitle}>{this.props.title}</h1>
 
             <form className={styles.form} onSubmit={this.handleSubmit}>
               <input

@@ -15,6 +15,18 @@ export function fetchAppsByQuery(query, page = 1, perPage = 18) {
     },
   }).then((res) => res.data);
 }
+export function fetchAppsByQueryProfile(query, page = 1, perPage = 18) {
+  return axios({
+    ...config,
+    method: "get",
+    url: "/apps",
+    params: {
+      page,
+      query,
+      perPage,
+    },
+  }).then((res) => res.data);
+}
 export function fetchAppDetails(appId) {
   return axios({
     ...config,

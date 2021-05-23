@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import * as operations from "../../redux/auth/authOperations";
 import * as selectors from "../../redux/auth/authSelectors";
+import { Link } from "react-router-dom";
 class LoginForm extends Component {
   render() {
     const { loading } = this.props;
@@ -16,10 +17,11 @@ class LoginForm extends Component {
       password: Yup.string().required("* Обязательное поле"),
     });
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} id={styles.authWrapper}>
         <div className={styles.formImageWrapper}>
           <img
             className={styles.formImage}
+            id={styles.authImg}
             alt="defaultImage"
             src={modalImage}
           />
@@ -37,10 +39,8 @@ class LoginForm extends Component {
         >
           {(props) => (
             <form className={styles.form} onSubmit={props.handleSubmit}>
-              <div>
-                <h1 className={styles.title} style={{ textAlign: "left" }}>
-                  Login
-                </h1>
+              <div className={styles.textWrapper}>
+                <h1 className={styles.loginTitle}>Login</h1>
                 <h5 className={styles.subtitle}>Welcome back!</h5>
               </div>
               <FormInput
@@ -69,6 +69,9 @@ class LoginForm extends Component {
               >
                 Login in
               </button>
+              <Link to="/register" className={styles.subtitle} id={styles.signUp}>
+                Sign Up
+              </Link>
               {loading && <Spinner />}
             </form>
           )}

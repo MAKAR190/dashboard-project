@@ -3,13 +3,11 @@ import Modal from "../../components/Modal/Modal";
 import CreateAppForm from "../../components/CreateAppForm/CreateAppForm";
 import EditAppForm from "../../components/CreateAppForm/EditAppForm";
 import queryString from "query-string";
-import { fetchAppsByQuery, deleteApp } from "../../services/appsApi";
+import { fetchAppsByQuery } from "../../services/appsApi";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import styles from "./Dashboard.module.css";
 import { toast } from "react-toastify";
-import Loader from "react-loader-spinner";
-import close from "../../images/close-icon.svg";
-import edit from "../../images/edit-icon.svg";
+import Spinner from "../../components/Spinner/Spinner";
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -17,43 +15,24 @@ class Dashboard extends Component {
     createModal: false,
     editModal: false,
     id: null,
-    page: 0,
+    page: 1,
     appsCount: 0,
-    perPage: 18,
+    perPage: 12,
     totalPages: null,
     loading: false,
     error: false,
   };
   componentDidMount() {
     const getCategoryFromProps = (string) => queryString.parse(string);
-    const { query } = getCategoryFromProps(this.props.location.search);
-    const { page } = getCategoryFromProps(this.props.location.search);
-    if (query) {
-      this.handleSubmit(query, page);
-      this.props.history.push({
-        ...this.props.location,
-        search: `page=${page}&query=${query}`,
-      });
-    } else {
-      this.handleSubmit("", 0);
-    }
+    const { query = "" } = getCategoryFromProps(this.props.location.search);
+    this.props.history.push({
+      ...this.props.location,
+      search: `query=${query}`,
+    });
   }
   componentDidUpdate(prevProps, prevState) {
-    const getCategoryFromProps = (string) => queryString.parse(string);
-    const { query: prevQuery } = getCategoryFromProps(
-      prevProps.location.search
-    );
-    const { query: nextQuery } = getCategoryFromProps(
-      this.props.location.search
-    );
-    if (prevQuery !== nextQuery) {
-      this.handleSubmit(nextQuery, 1);
-    }
-    if (prevState.apps !== this.state.apps && prevQuery !== nextQuery) {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+    if (prevProps.location !== this.props.location) {
+      this.handleSubmit();
     }
   }
   openCreateModal = () => {
@@ -79,23 +58,23 @@ class Dashboard extends Component {
     });
   };
   handleFormSubmit = (value) => {
-    if (value) {
-      this.props.history.push({
-        ...this.props.location,
-        search: `page=${1}&query=${value}`,
-      });
-      this.setState({
+    this.setState(
+      {
         apps: [],
         page: 1,
-      });
-    } else if (value === "") {
-      this.props.history.push({
-        ...this.props.location,
-        search: "",
-      });
-    }
+      },
+      () => {
+        this.props.history.push({
+          ...this.props.location,
+          search: `query=${value}`,
+        });
+      }
+    );
   };
-  handleSubmit = (query, page) => {
+  handleSubmit = () => {
+    const getCategoryFromProps = (string) => queryString.parse(string);
+    const { query = "" } = getCategoryFromProps(this.props.location.search);
+    const { page } = this.state;
     this.setState({
       loading: true,
     });
@@ -150,11 +129,11 @@ class Dashboard extends Component {
     });
   };
   render() {
-    const { apps, loading, appsCount, error, totalPages, page, query } =
-      this.state;
+    const { apps, loading, appsCount, error, page } = this.state;
     return (
       <div className={styles.container}>
         <DashboardHeader
+          title="Dashboard"
           submit={this.handleFormSubmit}
           openCreateModal={this.openCreateModal}
         />
@@ -162,20 +141,6 @@ class Dashboard extends Component {
         <ul className={styles.list}>
           {this.state.apps.map((item) => (
             <li className={styles.item} key={item.id}>
-              <img
-                className={styles.deleteButton}
-                onClick={() =>
-                  deleteApp(item.id).then(this.handleDeleteApp(item))
-                }
-                alt="close"
-                src={close}
-              />
-              <img
-                className={styles.editButton}
-                onClick={() => this.openEditModal(item.id)}
-                alt="edit"
-                src={edit}
-              />
               <img src={item.image} alt={item.title} className={styles.image} />
               <a
                 rel="noreferrer"
@@ -191,19 +156,10 @@ class Dashboard extends Component {
             </li>
           ))}
         </ul>
-        {loading && (
-          <Loader
-            className={styles.loader}
-            type="Puff"
-            color="#00BFFF"
-            height={100}
-            width={100}
-          />
-        )}
-        {!loading && apps.length !== appsCount && totalPages !== page && (
+        {!loading && apps.length !== appsCount && (
           <button
             className={styles.loadMoreBtn}
-            onClick={() => this.handleSubmit(query, page)}
+            onClick={() => this.handleSubmit(page)}
           >
             Load more
           </button>
@@ -223,6 +179,7 @@ class Dashboard extends Component {
             />
           </Modal>
         )}
+        {loading && <Spinner />}
       </div>
     );
   }

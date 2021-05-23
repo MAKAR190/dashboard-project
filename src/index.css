@@ -12,7 +12,7 @@ html.default {
   --title-font-weight: normal;
   --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 0.8rem;
+  --label-font-size: 0.85rem;
   --subtitle-font-size: 1.1rem;
   --btn-font-size: 1rem;
   --label-line-height: 1rem;
@@ -36,14 +36,15 @@ html.default {
 }
 html.orange {
   font-family: "Lato", sans-serif;
-  --title-font-size: 39px;
+  --title-font-size: 2.4rem;
   --title-font-weight: normal;
-  --title-line-height: 35px;
+  --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 14px;
-  --subtitle-font-size: 18px;
-  --btn-font-size: 18px;
-  --label-line-height: 17px;
+  --label-font-size: 0.8rem;
+  --subtitle-font-size: 1.1rem;
+  --btn-font-size: 1rem;
+  --label-line-height: 1rem;
+  --secondLabel-font-size: 0.75rem;
   --btn-bgc: #fe676c;
   --link-c: #fe676c;
   --label-c: #fe676c;
@@ -68,14 +69,15 @@ html.orange {
 }
 html.blue {
   font-family: "Lato", sans-serif;
-  --title-font-size: 39px;
+  --title-font-size: 2.4rem;
   --title-font-weight: normal;
-  --title-line-height: 35px;
+  --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 14px;
-  --subtitle-font-size: 18px;
-  --btn-font-size: 18px;
-  --label-line-height: 17px;
+  --label-font-size: 0.85rem;
+  --subtitle-font-size: 1.1rem;
+  --btn-font-size: 1rem;
+  --label-line-height: 1rem;
+  --secondLabel-font-size: 0.75rem;
   --btn-bgc: #2980b9;
   --link-c: #2980b9;
   --label-c: #2980b9;
@@ -100,14 +102,15 @@ html.blue {
 }
 html.purple {
   font-family: "Lato", sans-serif;
-  --title-font-size: 39px;
+  --title-font-size: 2.4rem;
   --title-font-weight: normal;
-  --title-line-height: 35px;
+  --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 14px;
-  --subtitle-font-size: 18px;
-  --btn-font-size: 18px;
-  --label-line-height: 17px;
+  --label-font-size: 0.85rem;
+  --subtitle-font-size: 1.1rem;
+  --btn-font-size: 1rem;
+  --label-line-height: 1rem;
+  --secondLabel-font-size: 0.75rem;
   --btn-bgc: #833ab4;
   --link-c: #fcb045;
   --label-c: #833ab4;
@@ -127,14 +130,15 @@ html.purple {
 }
 html.green {
   font-family: "Lato", sans-serif;
-  --title-font-size: 39px;
+  --title-font-size: 2.4rem;
   --title-font-weight: normal;
-  --title-line-height: 35px;
+  --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 14px;
-  --subtitle-font-size: 18px;
-  --btn-font-size: 18px;
-  --label-line-height: 17px;
+  --label-font-size: 0.85rem;
+  --subtitle-font-size: 1.1rem;
+  --btn-font-size: 1rem;
+  --label-line-height: 1rem;
+  --secondLabel-font-size: 0.75rem;
   --btn-bgc: #334d50;
   --link-c: #cbcaa5;
   --label-c: #334d50;
@@ -154,14 +158,15 @@ html.green {
 }
 html.lightgreen {
   font-family: "Lato", sans-serif;
-  --title-font-size: 39px;
+  --title-font-size: 2.4rem;
   --title-font-weight: normal;
-  --title-line-height: 35px;
+  --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 14px;
-  --subtitle-font-size: 18px;
-  --btn-font-size: 18px;
-  --label-line-height: 17px;
+  --label-font-size: 0.85rem;
+  --subtitle-font-size: 1.1rem;
+  --btn-font-size: 1rem;
+  --label-line-height: 1rem;
+  --secondLabel-font-size: 0.75rem;
   --btn-bgc: #588420;
   --link-c: #cbcaa5;
   --label-c: #588420;
@@ -181,14 +186,15 @@ html.lightgreen {
 }
 html.purpleblue {
   font-family: "Lato", sans-serif;
-  --title-font-size: 39px;
+  --title-font-size: 2.4rem;
   --title-font-weight: normal;
-  --title-line-height: 35px;
+  --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 14px;
-  --subtitle-font-size: 18px;
-  --btn-font-size: 18px;
-  --label-line-height: 17px;
+  --label-font-size: 0.85rem;
+  --subtitle-font-size: 1.1rem;
+  --btn-font-size: 1rem;
+  --label-line-height: 1rem;
+  --secondLabel-font-size: 0.75rem;
   --btn-bgc: #12c2e9;
   --link-c: #f7797d;
   --label-c: #12c2e9;
@@ -213,14 +219,15 @@ html.purpleblue {
 }
 html.salat {
   font-family: "Lato", sans-serif;
-  --title-font-size: 39px;
+  --title-font-size: 2.4rem;
   --title-font-weight: normal;
-  --title-line-height: 35px;
+  --title-line-height: 2.1rem;
   --label-font-weight: 300;
-  --label-font-size: 14px;
-  --subtitle-font-size: 18px;
-  --btn-font-size: 18px;
-  --label-line-height: 17px;
+  --label-font-size: 0.85rem;
+  --subtitle-font-size: 1.1rem;
+  --btn-font-size: 1rem;
+  --label-line-height: 1rem;
+  --secondLabel-font-size: 0.75rem;
   --btn-bgc: #2ebf91;
   --link-c: #2ebf91;
   --label-c: #fbd786;

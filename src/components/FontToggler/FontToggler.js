@@ -25,7 +25,7 @@ const ThemeToggler = ({
                 }
           }
         >
-          <p>{activeFont}</p>
+          <p>{activeFont && activeFont.replace(/px/g, "")}</p>
         </div>
         <button
           type="button"

@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 axios.defaults.baseURL = "https://goiteens-dashboard.herokuapp.com/api";
 document.querySelector("html").style.fontSize = "16px";
+document.querySelector("html").style.fontFamily = "Lato";
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>

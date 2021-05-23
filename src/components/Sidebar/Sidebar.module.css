@@ -37,15 +37,48 @@
   align-items: center;
   justify-content: center;
 }
+.sidebarBtns {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 45px;
+  margin-left: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 a {
   text-decoration: none;
-  font-family: Lato;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 19px;
   margin: auto;
   color: var(--navlink-c);
+}
+.button {
+  background: none;
+  border: none;
+  color: var(--navlink-c);
+  margin-left: 2px;
+  cursor: pointer;
+  font-size: var(--btn-font-size);
+}
+.authBtn {
+  background: var(--btn-bgc);
+  color: var(--navlink-c);
+  padding: 8px;
+  border-radius: 5px;
+  margin-left: 2px;
+  cursor: pointer;
+  font-size: var(--btn-font-size);
+  min-width: 50px;
+  text-align: center;
+}
+.or {
+  color: #fff;
+  padding: 0 10px 0 10px;
+  text-transform: uppercase;
 }
 @media (min-width: 320px) and (max-width: 1023px) {
   .sidebarBody {

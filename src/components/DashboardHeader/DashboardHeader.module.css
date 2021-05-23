@@ -1,5 +1,4 @@
 .searchWrapperTitle {
-  font-family: Lato;
   font-weight: normal;
   font-size: var(--title-font-size);
 }
@@ -43,7 +42,6 @@
   border: none;
   color: var(--btn-c);
   outline: none;
-  font-family: Lato;
   font-weight: bold;
   font-size: var(--label-font-size);
   line-height: 17px;
@@ -54,7 +52,6 @@
   margin-bottom: 10px;
 }
 .searchWrapperSmallTitle {
-  font-family: Lato;
   font-weight: normal;
   font-size: var(--subtitle-font-size);
   line-height: 23px;

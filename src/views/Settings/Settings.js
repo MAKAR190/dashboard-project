@@ -26,6 +26,28 @@ function Settings() {
       localStorage.setItem("activeTheme", JSON.stringify("default"));
     }
   }, []);
+  useEffect(() => {
+    if (localStorage.getItem("activeFont")) {
+      setActiveFont(JSON.parse(localStorage.getItem("activeFont")));
+      document.querySelector("html").style.fontFamily = JSON.parse(
+        localStorage.getItem("activeFont")
+      );
+    } else {
+      setActiveFont("Lato");
+      localStorage.setItem("activeFont", JSON.stringify("Lato"));
+    }
+  }, []);
+  useEffect(() => {
+    if (localStorage.getItem("activeFontSize")) {
+      setActiveFontSize(JSON.parse(localStorage.getItem("activeFontSize")));
+      document.querySelector("html").style.fontSize = JSON.parse(
+        localStorage.getItem("activeFontSize")
+      );
+    } else {
+      setActiveFontSize(16);
+      localStorage.setItem("activeFontSize", JSON.stringify(16));
+    }
+  }, []);
   function handleThemeChange(newTheme) {
     setActiveTheme(newTheme);
     localStorage.setItem("activeTheme", JSON.stringify(newTheme));
@@ -34,10 +56,14 @@ function Settings() {
   }
   function handleFontChange(newFont) {
     setActiveFont(newFont);
+    document.querySelector("html").style.fontFamily = newFont;
+    localStorage.setItem("activeFont", JSON.stringify(newFont));
     setFontVisible(false);
   }
   function handleFontSizeChange(newFontSize) {
     setActiveFontSize(newFontSize);
+    document.querySelector("html").style.fontSize = newFontSize + "px";
+    localStorage.setItem("activeFontSize", JSON.stringify(newFontSize + "px"));
     setFontSizeVisible(false);
   }
 

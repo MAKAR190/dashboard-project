@@ -9,12 +9,24 @@ import * as operations from "../redux/auth/authOperations";
 function App({ fetchUserData }) {
   useEffect(() => {
     fetchUserData();
+  }, [fetchUserData]);
+  useEffect(() => {
     if (localStorage.getItem("activeTheme")) {
       document.querySelector("html").className = JSON.parse(
         localStorage.getItem("activeTheme")
       );
     }
-  }, [fetchUserData]);
+    if (localStorage.getItem("activeFont")) {
+      document.querySelector("html").style.fontFamily = JSON.parse(
+        localStorage.getItem("activeFont")
+      );
+    }
+    if (localStorage.getItem("activeFontSize")) {
+      document.querySelector("html").style.fontSize = JSON.parse(
+        localStorage.getItem("activeFontSize")
+      );
+    }
+  }, []);
   return (
     <Layout>
       <Switch>

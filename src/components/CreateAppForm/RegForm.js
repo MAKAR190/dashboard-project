@@ -19,10 +19,11 @@ class RegForm extends Component {
     });
 
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} id={styles.authWrapper}>
         <div className={styles.formImageWrapper}>
           <img
             className={styles.formImage}
+            id={styles.authImg}
             alt="defaultImage"
             src={modalImage}
           />
@@ -41,10 +42,8 @@ class RegForm extends Component {
         >
           {(props) => (
             <form className={styles.form} onSubmit={props.handleSubmit}>
-              <div>
-                <h1 className={styles.title} style={{ textAlign: "left" }}>
-                  Sign up
-                </h1>
+              <div className={styles.textWrapper}>
+                <h1 className={styles.loginTitle}>Sign up</h1>
                 <h5 className={styles.subtitle}>Welcome on board!</h5>
               </div>
               <FormInput
