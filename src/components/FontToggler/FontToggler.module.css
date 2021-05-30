@@ -16,6 +16,7 @@
 }
 #fontItem {
   border-right: 1px solid var(--input-brd);
+  cursor: pointer;
 }
 
 .list {

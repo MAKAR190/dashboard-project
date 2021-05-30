@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import styles from "./DashboardHeader.module.css";
 import icon from "../../images/search-icon.svg";
-export default class DashboardHeader extends Component {
+import { connect } from "react-redux";
+import * as selectors from "../../redux/auth/authSelectors";
+class DashboardHeader extends Component {
   state = {
     value: "",
   };
@@ -15,33 +17,52 @@ export default class DashboardHeader extends Component {
     this.props.submit(this.state.value);
   };
   render() {
+    const { isAuthendicated } = this.props;
     return (
       <div className={styles.wrapper}>
         <div className={styles.searchWrapper}>
           <div className={styles.searchWrapperBox}>
             <h1 className={styles.searchWrapperTitle}>{this.props.title}</h1>
 
-            <form className={styles.form} onSubmit={this.handleSubmit}>
-              <input
-                value={this.state.value}
-                onChange={this.handleChange}
-                className={styles.searchInput}
-                placeholder="Search"
-              />
-              <div className={styles.icon}>
-                <img src={icon} alt="icon" />
-              </div>
-            </form>
+            <div className={styles.formBox}>
+              <form className={styles.form} onSubmit={this.handleSubmit}>
+                <input
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  className={styles.searchInput}
+                  placeholder="Search"
+                />
+                <div className={styles.icon}>
+                  <img src={icon} alt="icon" />
+                </div>
+              </form>
+              {isAuthendicated && (
+                <button
+                  className={styles.mobileBtn}
+                  type="button"
+                  onClick={this.props.openCreateModal}
+                >
+                  <i className="fas fa-plus"></i>
+                </button>
+              )}
+            </div>
           </div>
-          <button
-            className={styles.btn}
-            type="button"
-            onClick={this.props.openCreateModal}
-          >
-            Add app
-          </button>
+          {isAuthendicated && (
+            <button
+              className={styles.btn}
+              type="button"
+              onClick={this.props.openCreateModal}
+            >
+              Add app
+            </button>
+          )}
         </div>
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  isAuthendicated: selectors.isAuthenticated(state),
+});
+
+export default connect(mapStateToProps)(DashboardHeader);

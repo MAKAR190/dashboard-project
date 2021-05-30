@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner/Spinner";
 import edit from "../../images/edit-icon.svg";
 import close from "../../images/close-icon.svg";
+import UserProfile from "../../components/UserProfile/UserProfile";
 class Dashboard extends Component {
   state = {
     apps: [],
@@ -35,12 +36,6 @@ class Dashboard extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.location !== this.props.location) {
       this.handleSubmit();
-    }
-    if (prevState.apps !== this.state.apps) {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
     }
   }
   openCreateModal = () => {
@@ -140,8 +135,10 @@ class Dashboard extends Component {
     const { apps, loading, appsCount, error, page } = this.state;
     return (
       <div className={styles.container}>
+        {window.innerWidth < 1024 && <UserProfile />}
+
         <DashboardHeader
-          title="Profile"
+          title="My apps"
           submit={this.handleFormSubmit}
           openCreateModal={this.openCreateModal}
         />

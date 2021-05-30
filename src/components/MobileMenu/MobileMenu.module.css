@@ -1,0 +1,52 @@
+@media (min-width: 320px) and (max-width: 1023px) {
+  .wrapper {
+    display: block;
+  }
+  .menuBtn {
+    margin: 15px;
+    position: fixed;
+    top: 0%;
+    right: 5%;
+    color: var(--btn-bgc);
+    font-size: 30px;
+    z-index: 1;
+  }
+  .menu {
+    background-color: var(--btn-bgc);
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100px;
+    border-radius: 5px;
+    position: fixed;
+    right: 8.5%;
+    top: 5.5%;
+    z-index: 1;
+    font-size: var(--label-font-size);
+    font-weight: lighter;
+    transition: opacity 0.3s;
+    animation: openAnim 0.3s linear;
+  }
+  .menuItem {
+    opacity: 1;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin: 0 0 0 10px;
+  }
+  @keyframes openAnim {
+    from {
+      opacity: 0;
+      visibility: hidden;
+    }
+    to {
+      opacity: 0.8;
+      visibility: visible;
+    }
+  }
+}
+@media (min-width: 1024px) {
+  .wrapper {
+    display: none;
+  }
+}

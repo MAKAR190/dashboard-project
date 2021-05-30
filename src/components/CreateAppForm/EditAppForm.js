@@ -54,7 +54,7 @@ export default function CreateAppForm({ id, onSuccess }) {
         })
       )
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, formik]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.formImageWrapper}>

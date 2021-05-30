@@ -6,6 +6,7 @@ import { routes, urls } from "../routes";
 import Layout from "./Layout/Layout";
 import { connect } from "react-redux";
 import * as operations from "../redux/auth/authOperations";
+import MobileMenu from "../components/MobileMenu/MobileMenu";
 function App({ fetchUserData }) {
   useEffect(() => {
     fetchUserData();
@@ -29,6 +30,7 @@ function App({ fetchUserData }) {
   }, []);
   return (
     <Layout>
+      <MobileMenu />
       <Switch>
         {routes.map((route) =>
           route.private ? (

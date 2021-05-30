@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  max-width: 200px;
+}
+#img {
+  width: 20%;
+  margin-right: 10px;
+  margin-left: 25px;
+  font-size: 30px;
+  color: var(--navlink-c);
+}
+.email {
+  color: var(--navlink-c);
+  font-size: var(--subtitle-font-size);
+}
+@media (min-width: 320px) and (max-width: 1023px) {
+  .email {
+    color: #000;
+  }
+  #img {
+    margin-left: 8px;
+    margin-right: 5px;
+    color: var(--btn-bgc);
+  }
+}

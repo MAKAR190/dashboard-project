@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as selectors from "../../redux/auth/authSelectors";
 import * as operations from "../../redux/auth/authOperations";
+import UserProfile from "../UserProfile/UserProfile";
 class Sidebar extends Component {
   render() {
     const { logout, isAuthorized } = this.props;
@@ -29,7 +30,7 @@ class Sidebar extends Component {
           </li>
           <li>
             <img className={styles.sidebarImg} src={profileIcon} alt="" />
-            <Link to="/profile">Profile</Link>
+            <Link to="/profile">My apps</Link>
           </li>
           <li>
             <img className={styles.sidebarImg} src={aboutusIcon} alt="" />
@@ -37,12 +38,19 @@ class Sidebar extends Component {
           </li>
         </ul>
         {isAuthorized ? (
-          <div className={styles.sidebarLogout}>
-            <img className={styles.sidebarImg} src={logoutIcon} alt="logout" />
-            <button className={styles.button} onClick={logout}>
-              Logout
-            </button>
-          </div>
+          <>
+            <UserProfile />
+            <div className={styles.sidebarLogout}>
+              <img
+                className={styles.sidebarImg}
+                src={logoutIcon}
+                alt="logout"
+              />
+              <button className={styles.button} onClick={logout}>
+                Logout
+              </button>
+            </div>
+          </>
         ) : (
           <div className={styles.sidebarBtns}>
             <Link to="/login" className={styles.authBtn}>

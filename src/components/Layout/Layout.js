@@ -4,7 +4,6 @@ import styles from "./Layout.module.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../Sidebar/Sidebar";
-
 function Layout({ children }) {
   return (
     <div className={styles.layout}>
